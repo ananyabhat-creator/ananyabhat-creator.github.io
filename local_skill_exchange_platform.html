@@ -1,0 +1,401 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=Instrument+Sans:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.app{min-height:700px}
+.screen{display:none}
+.screen.active{display:block}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem 0.5rem}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--color-text-primary);letter-spacing:-0.5px}
+.logo span{color:#1D9E75}
+.nav-tabs{display:flex;gap:2px;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:3px;margin:0 1.25rem 1rem}
+.nav-tab{flex:1;padding:7px 4px;border:none;background:transparent;font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-radius:var(--border-radius-md);transition:all 0.18s;font-weight:400}
+.nav-tab.active{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+
+.content{padding:0 1.25rem 1.25rem}
+
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.875rem 1rem}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:0.04em}
+.stat-value{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--color-text-primary)}
+.stat-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.filter-pill{padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:all 0.15s}
+.filter-pill.active{background:#E1F5EE;border-color:#5DCAA5;color:#085041}
+.filter-pill:hover{background:var(--color-background-secondary)}
+
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.skill-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;cursor:pointer;transition:border-color 0.15s}
+.skill-card:hover{border-color:var(--color-border-primary)}
+.skill-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+.avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;flex-shrink:0}
+.badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap}
+.skill-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:500;margin-bottom:3px;color:var(--color-text-primary)}
+.skill-person{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
+.skill-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px}
+.skill-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--color-text-secondary)}
+.stars{color:#BA7517;font-size:12px;letter-spacing:1px}
+.skill-actions{display:flex;gap:6px;margin-top:10px}
+.btn-request{flex:1;padding:7px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:background 0.15s}
+.btn-request:hover{background:#0F6E56}
+.btn-save{width:34px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:15px;color:var(--color-text-secondary);transition:all 0.15s;display:flex;align-items:center;justify-content:center}
+.btn-save.saved{color:#E24B4A;border-color:#F09595}
+.btn-save:hover{background:var(--color-background-secondary)}
+
+.offer-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.offer-body{flex:1;min-width:0}
+.offer-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.offer-person{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
+.offer-wants{font-size:12px;padding:4px 10px;border-radius:20px;background:#EEEDFE;color:#534AB7;display:inline-block;margin-bottom:6px}
+.offer-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.offer-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+
+.form-group{margin-bottom:1rem}
+.form-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat-select-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+.cat-opt{padding:8px 6px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;font-size:12px;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:all 0.15s}
+.cat-opt.selected{border-color:#1D9E75;background:#E1F5EE;color:#085041;font-weight:500}
+.cat-opt:hover{background:var(--color-background-secondary)}
+.submit-btn{width:100%;padding:11px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.02em;transition:background 0.15s;margin-top:4px}
+.submit-btn:hover{background:#0F6E56}
+.success-banner{background:#E1F5EE;border:0.5px solid #5DCAA5;border-radius:var(--border-radius-md);padding:12px 14px;font-size:13px;color:#085041;margin-bottom:1rem;display:none}
+
+.msg-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+.msg-item{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;display:flex;gap:10px;cursor:pointer;transition:border-color 0.15s}
+.msg-item:hover{border-color:var(--color-border-primary)}
+.msg-item.unread{border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0}
+.msg-body{flex:1;min-width:0}
+.msg-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.msg-preview{font-size:12px;color:var(--color-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.msg-time{font-size:11px;color:var(--color-text-secondary);flex-shrink:0}
+.dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;margin-top:4px}
+
+.profile-header{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem;display:flex;gap:14px;align-items:center}
+.profile-avatar{width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#085041;flex-shrink:0}
+.profile-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
+.profile-loc{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
+.profile-bio{font-size:13px;color:var(--color-text-secondary);margin-top:6px;line-height:1.5}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:11px;padding:4px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+.section-divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1rem 0}
+.exchange-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.exchange-row:last-child{border-bottom:none}
+.exchange-badge{width:36px;height:36px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.exchange-info{flex:1}
+.exchange-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.exchange-sub{font-size:12px;color:var(--color-text-secondary);margin-top:1px}
+.status-pill{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500}
+</style>
+
+<div class="app">
+<h2 class="sr-only">Local Skill Exchange Platform — browse, offer, and swap skills with neighbours</h2>
+
+<div class="topbar">
+  <div class="logo">skill<span>swap</span></div>
+  <div style="font-size:12px;color:var(--color-text-secondary)">Mysuru, KA</div>
+</div>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showScreen('browse',this)">Browse</button>
+  <button class="nav-tab" onclick="showScreen('offer',this)">Offer</button>
+  <button class="nav-tab" onclick="showScreen('messages',this)">Messages</button>
+  <button class="nav-tab" onclick="showScreen('profile',this)">Profile</button>
+</div>
+
+<!-- BROWSE -->
+<div class="screen active content" id="browse">
+  <div class="stat-row">
+    <div class="stat-card"><div class="stat-label">Members</div><div class="stat-value">284</div><div class="stat-sub">in your area</div></div>
+    <div class="stat-card"><div class="stat-label">Skills</div><div class="stat-value">61</div><div class="stat-sub">listed today</div></div>
+    <div class="stat-card"><div class="stat-label">Swaps</div><div class="stat-value">43</div><div class="stat-sub">this week</div></div>
+  </div>
+  <input type="text" placeholder="Search skills or people..." id="searchSkills" oninput="filterSkills()" style="width:100%;margin-bottom:1rem" />
+  <div class="section-label">Category</div>
+  <div class="filter-row" id="filterRow">
+    <button class="filter-pill active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-pill" onclick="setFilter('tech',this)">Tech</button>
+    <button class="filter-pill" onclick="setFilter('creative',this)">Creative</button>
+    <button class="filter-pill" onclick="setFilter('home',this)">Home</button>
+    <button class="filter-pill" onclick="setFilter('wellness',this)">Wellness</button>
+    <button class="filter-pill" onclick="setFilter('tutoring',this)">Tutoring</button>
+  </div>
+  <div id="skillGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem"></div>
+</div>
+
+<!-- OFFER -->
+<div class="screen content" id="offer">
+  <div class="success-banner" id="successBanner">Your skill has been listed! Others in your area can now find and request it.</div>
+  <div class="section-label" style="margin-bottom:1rem">List a skill you can offer</div>
+
+  <div class="form-group">
+    <label class="form-label">Skill title</label>
+    <input type="text" placeholder="e.g. Python tutoring, Saree draping, Guitar lessons" id="skillTitle" style="width:100%" />
+  </div>
+  <div class="form-group">
+    <label class="form-label">Category</label>
+    <div class="cat-select-grid" id="catGrid">
+      <div class="cat-opt selected" onclick="selCat(this,'tech')">Tech</div>
+      <div class="cat-opt" onclick="selCat(this,'creative')">Creative</div>
+      <div class="cat-opt" onclick="selCat(this,'home')">Home</div>
+      <div class="cat-opt" onclick="selCat(this,'wellness')">Wellness</div>
+      <div class="cat-opt" onclick="selCat(this,'tutoring')">Tutoring</div>
+      <div class="cat-opt" onclick="selCat(this,'other')">Other</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Description</label>
+    <textarea placeholder="Describe what you'll offer, your experience level, and how sessions would work..." rows="3" id="skillDesc" style="width:100%;resize:vertical"></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group" style="margin-bottom:0">
+      <label class="form-label">Duration</label>
+      <select id="skillDur" style="width:100%">
+        <option>30 min</option><option>1 hour</option><option>2 hours</option><option>Flexible</option>
+      </select>
+    </div>
+    <div class="form-group" style="margin-bottom:0">
+      <label class="form-label">Format</label>
+      <select id="skillFmt" style="width:100%">
+        <option>In person</option><option>Online</option><option>Both</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group" style="margin-top:1rem">
+    <label class="form-label">I'd love in return</label>
+    <input type="text" placeholder="e.g. Cooking lessons, Yoga sessions, Web design help..." id="skillWant" style="width:100%" />
+  </div>
+  <button class="submit-btn" onclick="submitSkill()">List my skill</button>
+
+  <hr class="section-divider" style="margin-top:1.5rem">
+  <div class="section-label" style="margin-bottom:10px">Recent offers from neighbours</div>
+  <div id="offerList"></div>
+</div>
+
+<!-- MESSAGES -->
+<div class="screen content" id="messages">
+  <div class="section-label" style="margin-bottom:10px">Conversations</div>
+  <div class="msg-list" id="msgList"></div>
+  <hr class="section-divider">
+  <div class="section-label" style="margin-bottom:10px">Pending requests</div>
+  <div id="pendingList"></div>
+</div>
+
+<!-- PROFILE -->
+<div class="screen content" id="profile">
+  <div class="profile-header">
+    <div class="profile-avatar">AK</div>
+    <div>
+      <div class="profile-name">Ananya Kumar</div>
+      <div class="profile-loc">Jayalakshmipuram, Mysuru</div>
+      <div class="profile-bio">Designer & Bharatanatyam dancer. Love learning new things and sharing what I know.</div>
+      <div class="tag-list">
+        <span class="tag">UI Design</span><span class="tag">Bharatanatyam</span><span class="tag">Kannada</span>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
+    <div class="stat-card"><div class="stat-label">Skills offered</div><div class="stat-value">3</div></div>
+    <div class="stat-card"><div class="stat-label">Swaps done</div><div class="stat-value">7</div><div class="stat-sub">4.9 avg rating</div></div>
+  </div>
+  <div class="section-label" style="margin-bottom:8px">My exchanges</div>
+  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:4px 14px" id="exchangeList"></div>
+</div>
+
+</div>
+
+<script>
+const skills = [
+  {id:1,name:"Python & data science",person:"Ravi M.",initials:"RM",color:"#E6F1FB",textColor:"#0C447C",cat:"tech",desc:"I'll teach you Python fundamentals, pandas, and matplotlib. 2+ years tutoring.",rating:4.9,reviews:12,dist:"0.8 km",saved:false,badge:"Popular",badgeBg:"#EAF3DE",badgeColor:"#27500A"},
+  {id:2,name:"Silk saree draping",person:"Meena S.",initials:"MS",color:"#FBEAF0",textColor:"#72243E",cat:"creative",desc:"Traditional Mysore style and 5 modern draping styles. Any occasion.",rating:5.0,reviews:8,dist:"1.2 km",saved:false,badge:"Top rated",badgeBg:"#FAEEDA",badgeColor:"#633806"},
+  {id:3,name:"Yoga & pranayama",person:"Suresh K.",initials:"SK",color:"#E1F5EE",textColor:"#085041",cat:"wellness",desc:"15 years practice. Beginner to intermediate. Morning or evening sessions.",rating:4.8,reviews:21,dist:"2.1 km",saved:false,badge:null},
+  {id:4,name:"Plumbing & repairs",person:"Ganesh R.",initials:"GR",color:"#FAEEDA",textColor:"#633806",cat:"home",desc:"Minor repairs, pipe fitting, tap replacement. I'll come to your place.",rating:4.7,reviews:34,dist:"0.4 km",saved:false,badge:"Nearby",badgeBg:"#E6F1FB",badgeColor:"#0C447C"},
+  {id:5,name:"Carnatic music (vocal)",person:"Lakshmi P.",initials:"LP",color:"#EEEDFE",textColor:"#3C3489",cat:"creative",desc:"Graded lessons from basics to advanced ragas. All ages welcome.",rating:5.0,reviews:15,dist:"1.8 km",saved:false,badge:null},
+  {id:6,name:"UPSC & SSC coaching",person:"Arjun T.",initials:"AT",color:"#EAF3DE",textColor:"#27500A",cat:"tutoring",desc:"GS paper strategy, current affairs, answer writing. 3 cleared friends.",rating:4.8,reviews:9,dist:"3.0 km",saved:false,badge:null},
+  {id:7,name:"Graphic design (Canva/AI)",person:"Divya N.",initials:"DN",color:"#FAECE7",textColor:"#712B13",cat:"tech",desc:"Posters, social media content, brand kits. Also teach Canva from scratch.",rating:4.6,reviews:7,dist:"1.5 km",saved:false,badge:null},
+  {id:8,name:"Home garden setup",person:"Padma B.",initials:"PB",color:"#E1F5EE",textColor:"#085041",cat:"home",desc:"Terrace garden, kitchen herbs, composting. Will visit and help you set up.",rating:4.9,reviews:11,dist:"0.9 km",saved:false,badge:"New",badgeBg:"#FCEBEB",badgeColor:"#791F1F"},
+];
+
+const offers = [
+  {title:"Spoken English coaching",person:"Kiran V.",initials:"KV",color:"#E6F1FB",textColor:"#0C447C",wants:"Cooking lessons",desc:"Fluency & confidence building. 10 years corporate trainer."},
+  {title:"Mehendi design",person:"Fatima Z.",initials:"FZ",color:"#FBEAF0",textColor:"#72243E",wants:"Laptop repair help",desc:"Bridal, Arabic, Indo-fusion styles. Willing to travel locally."},
+  {title:"Auto & bike basic maintenance",person:"Santosh M.",initials:"SM",color:"#FAEEDA",textColor:"#633806",wants:"English tutoring",desc:"Oil change, chain lube, tyre check. Teach you too!"},
+];
+
+const messages = [
+  {name:"Ravi M.",preview:"Sure, Saturday 10am works for me!",time:"11m",unread:true},
+  {name:"Meena S.",preview:"Thank you for the lovely saree draping session.",time:"2h",unread:false},
+  {name:"Suresh K.",preview:"Can we do a trial session this week?",time:"1d",unread:true},
+];
+
+const pending = [
+  {title:"Python tutoring request",from:"Ananya K. → Ravi M.",status:"Awaiting reply",statusBg:"#FAEEDA",statusColor:"#633806",icon:"💬",iconBg:"#E6F1FB"},
+  {title:"Yoga session confirmed",from:"Suresh K. → Ananya K.",status:"Confirmed",statusBg:"#E1F5EE",statusColor:"#085041",icon:"✓",iconBg:"#E1F5EE"},
+];
+
+const exchanges = [
+  {title:"Python lessons",sub:"with Ravi M. · 3 sessions",status:"Active",statusBg:"#E1F5EE",statusColor:"#085041",icon:"💻",iconBg:"#E6F1FB"},
+  {title:"Yoga sessions",sub:"with Suresh K. · completed",status:"Done",statusBg:"#F1EFE8",statusColor:"#5F5E5A",icon:"🧘",iconBg:"#E1F5EE"},
+  {title:"Bharatanatyam",sub:"offered to Priya R. · 5 sessions",status:"Active",statusBg:"#E1F5EE",statusColor:"#085041",icon:"💃",iconBg:"#FBEAF0"},
+];
+
+let activeFilter = 'all';
+let selectedCat = 'tech';
+
+function showScreen(id, btn) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setFilter(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  renderSkills();
+}
+
+function filterSkills() { renderSkills(); }
+
+function renderSkills() {
+  const q = (document.getElementById('searchSkills').value||'').toLowerCase();
+  const grid = document.getElementById('skillGrid');
+  grid.innerHTML = '';
+  skills.filter(s => (activeFilter==='all'||s.cat===activeFilter) && (!q||s.name.toLowerCase().includes(q)||s.person.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q))).forEach(s => {
+    const d = document.createElement('div');
+    d.className = 'skill-card';
+    d.innerHTML = `
+      <div class="skill-card-top">
+        <div class="avatar" style="background:${s.color};color:${s.textColor}">${s.initials}</div>
+        ${s.badge?`<span class="badge" style="background:${s.badgeBg};color:${s.badgeColor}">${s.badge}</span>`:''}
+      </div>
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-person">${s.person} · ${s.dist}</div>
+      <div class="skill-desc">${s.desc}</div>
+      <div class="skill-meta">
+        <span class="stars">${'★'.repeat(Math.round(s.rating))}</span>
+        <span>${s.rating} (${s.reviews})</span>
+      </div>
+      <div class="skill-actions">
+        <button class="btn-request" onclick="requestSkill(${s.id})">Request swap</button>
+        <button class="btn-save${s.saved?' saved':''}" id="save-${s.id}" onclick="toggleSave(${s.id})" title="Save">${s.saved?'♥':'♡'}</button>
+      </div>
+    `;
+    grid.appendChild(d);
+  });
+}
+
+function requestSkill(id) {
+  const s = skills.find(x=>x.id===id);
+  sendPrompt(`I'd like to request a skill swap with ${s.person} for "${s.name}". What should I say in my first message?`);
+}
+
+function toggleSave(id) {
+  const s = skills.find(x=>x.id===id);
+  s.saved = !s.saved;
+  const btn = document.getElementById('save-'+id);
+  if(btn) { btn.textContent = s.saved?'♥':'♡'; btn.className='btn-save'+(s.saved?' saved':''); }
+}
+
+function selCat(el, cat) {
+  document.querySelectorAll('.cat-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedCat = cat;
+}
+
+function submitSkill() {
+  const title = document.getElementById('skillTitle').value.trim();
+  if(!title) { document.getElementById('skillTitle').focus(); return; }
+  document.getElementById('successBanner').style.display='block';
+  document.getElementById('skillTitle').value='';
+  document.getElementById('skillDesc').value='';
+  document.getElementById('skillWant').value='';
+  setTimeout(()=>document.getElementById('successBanner').style.display='none',4000);
+  renderOffers();
+}
+
+function renderOffers() {
+  const list = document.getElementById('offerList');
+  list.innerHTML = '';
+  offers.forEach(o => {
+    const d = document.createElement('div');
+    d.className = 'offer-card';
+    d.innerHTML = `
+      <div class="avatar" style="background:${o.color};color:${o.textColor};width:42px;height:42px;font-size:14px;flex-shrink:0">${o.initials}</div>
+      <div class="offer-body">
+        <div class="offer-title">${o.title}</div>
+        <div class="offer-person">${o.person}</div>
+        <span class="offer-wants">Wants: ${o.wants}</span>
+        <div class="offer-desc">${o.desc}</div>
+      </div>
+      <div class="offer-side">
+        <button class="btn-request" style="width:70px;font-size:11px;padding:6px" onclick="sendPrompt('How do I propose a skill swap for ${o.title} with ${o.person}?')">Connect ↗</button>
+      </div>
+    `;
+    list.appendChild(d);
+  });
+}
+
+function renderMessages() {
+  const list = document.getElementById('msgList');
+  list.innerHTML = '';
+  messages.forEach(m => {
+    const d = document.createElement('div');
+    d.className = 'msg-item'+(m.unread?' unread':'');
+    d.innerHTML = `
+      ${m.unread?'<div class="dot"></div>':'<div style="width:8px;flex-shrink:0"></div>'}
+      <div class="msg-body">
+        <div class="msg-name">${m.name}</div>
+        <div class="msg-preview">${m.preview}</div>
+      </div>
+      <div class="msg-time">${m.time}</div>
+    `;
+    list.appendChild(d);
+  });
+  const pl = document.getElementById('pendingList');
+  pl.innerHTML = '';
+  pending.forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'offer-card';
+    d.style.marginBottom='8px';
+    d.innerHTML = `
+      <div style="width:38px;height:38px;border-radius:var(--border-radius-md);background:${p.iconBg};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${p.icon}</div>
+      <div class="offer-body">
+        <div class="offer-title">${p.title}</div>
+        <div class="offer-person">${p.from}</div>
+      </div>
+      <span class="status-pill" style="background:${p.statusBg};color:${p.statusColor};align-self:center">${p.status}</span>
+    `;
+    pl.appendChild(d);
+  });
+}
+
+function renderExchanges() {
+  const el = document.getElementById('exchangeList');
+  el.innerHTML = '';
+  exchanges.forEach(e => {
+    const d = document.createElement('div');
+    d.className = 'exchange-row';
+    d.innerHTML = `
+      <div class="exchange-badge" style="background:${e.iconBg}">${e.icon}</div>
+      <div class="exchange-info">
+        <div class="exchange-title">${e.title}</div>
+        <div class="exchange-sub">${e.sub}</div>
+      </div>
+      <span class="status-pill" style="background:${e.statusBg};color:${e.statusColor}">${e.status}</span>
+    `;
+    el.appendChild(d);
+  });
+}
+
+renderSkills();
+renderOffers();
+renderMessages();
+renderExchanges();
+</script>
