@@ -1,53 +1,104 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkillSwap — Mysuru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=Instrument+Sans:wght@400;500&display=swap');
+:root{
+  --color-text-primary:#111210;
+  --color-text-secondary:#6B7280;
+  --color-background-primary:#FFFFFF;
+  --color-background-secondary:#F5F5F3;
+  --color-border-primary:#C0C0BB;
+  --color-border-secondary:#DEDED9;
+  --color-border-tertiary:#EEEEED;
+  --border-radius-sm:6px;
+  --border-radius-md:10px;
+  --border-radius-lg:14px;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
+body{
+  font-family:'Instrument Sans',sans-serif;
+  color:var(--color-text-primary);
+  background:linear-gradient(135deg,#E8F5F0 0%,#F0EBF8 50%,#FBF0E8 100%);
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:24px 16px 48px;
+}
+.shell{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 4px 6px rgba(0,0,0,.04),0 20px 60px rgba(0,0,0,.10);
+  overflow:hidden;
+}
+input,textarea,select{
+  font-family:'Instrument Sans',sans-serif;
+  font-size:13px;
+  color:var(--color-text-primary);
+  background:var(--color-background-secondary);
+  border:0.5px solid var(--color-border-secondary);
+  border-radius:var(--border-radius-md);
+  padding:9px 12px;
+  outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:#1D9E75;
+  box-shadow:0 0 0 3px rgba(29,158,117,.12);
+  background:#fff;
+}
+input::placeholder,textarea::placeholder{color:#B0B5BB}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-.app{min-height:700px}
 .screen{display:none}
 .screen.active{display:block}
 
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem 0.5rem}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem 0.5rem}
 .logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--color-text-primary);letter-spacing:-0.5px}
-.logo span{color:#36826a}
+.logo span{color:#1D9E75}
 .nav-tabs{display:flex;gap:2px;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:3px;margin:0 1.25rem 1rem}
-.nav-tab{flex:1;padding:7px 4px;border:none;background:transparent;font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-radius:var(--border-radius-md);transition:all 0.18s;font-weight:400}
-.nav-tab.active{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+.nav-tab{flex:1;padding:7px 4px;border:none;background:transparent;font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-radius:var(--border-radius-md);transition:all .18s;font-weight:400}
+.nav-tab.active{background:#fff;color:var(--color-text-primary);font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,.08);border:0.5px solid var(--color-border-tertiary)}
 
-.content{padding:0 1.25rem 1.25rem}
+.content{padding:0 1.25rem 1.5rem}
 
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
-.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.875rem 1rem}
-.stat-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:0.04em}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem 1rem}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
 .stat-value{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--color-text-primary)}
 .stat-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
 
-.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
 .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
-.filter-pill{padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:all 0.15s}
-.filter-pill.active{background:#E1F5EE;border-color:#5DCAA5;color:#085041}
+.filter-pill{padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.filter-pill.active{background:#E1F5EE;border-color:#5DCAA5;color:#085041;font-weight:500}
 .filter-pill:hover{background:var(--color-background-secondary)}
 
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
-.skill-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;cursor:pointer;transition:border-color 0.15s}
-.skill-card:hover{border-color:var(--color-border-primary)}
+#skillGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.skill-card{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.skill-card:hover{border-color:#5DCAA5;box-shadow:0 4px 16px rgba(29,158,117,.1)}
 .skill-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;flex-shrink:0}
 .badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap}
-.skill-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:500;margin-bottom:3px;color:var(--color-text-primary)}
+.skill-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;margin-bottom:3px;color:var(--color-text-primary)}
 .skill-person{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
 .skill-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px}
 .skill-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--color-text-secondary)}
 .stars{color:#BA7517;font-size:12px;letter-spacing:1px}
 .skill-actions{display:flex;gap:6px;margin-top:10px}
-.btn-request{flex:1;padding:7px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:background 0.15s}
+.btn-request{flex:1;padding:7px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:background .15s}
 .btn-request:hover{background:#0F6E56}
-.btn-save{width:34px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:15px;color:var(--color-text-secondary);transition:all 0.15s;display:flex;align-items:center;justify-content:center}
+.btn-save{width:34px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:15px;color:var(--color-text-secondary);transition:all .15s;display:flex;align-items:center;justify-content:center}
 .btn-save.saved{color:#E24B4A;border-color:#F09595}
 .btn-save:hover{background:var(--color-background-secondary)}
 
-.offer-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.offer-card{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
 .offer-body{flex:1;min-width:0}
 .offer-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
 .offer-person{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
@@ -56,18 +107,18 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
 .offer-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
 
 .form-group{margin-bottom:1rem}
-.form-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
+.form-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cat-select-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
-.cat-opt{padding:8px 6px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;font-size:12px;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:all 0.15s}
+.cat-opt{padding:8px 6px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;font-size:12px;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:all .15s;font-family:'Instrument Sans',sans-serif}
 .cat-opt.selected{border-color:#1D9E75;background:#E1F5EE;color:#085041;font-weight:500}
 .cat-opt:hover{background:var(--color-background-secondary)}
-.submit-btn{width:100%;padding:11px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.02em;transition:background 0.15s;margin-top:4px}
-.submit-btn:hover{background:#0F6E56}
+.submit-btn{width:100%;padding:11px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:background .15s,box-shadow .15s;margin-top:4px}
+.submit-btn:hover{background:#0F6E56;box-shadow:0 4px 16px rgba(29,158,117,.3)}
 .success-banner{background:#E1F5EE;border:0.5px solid #5DCAA5;border-radius:var(--border-radius-md);padding:12px 14px;font-size:13px;color:#085041;margin-bottom:1rem;display:none}
 
 .msg-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
-.msg-item{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;display:flex;gap:10px;cursor:pointer;transition:border-color 0.15s}
+.msg-item{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;display:flex;gap:10px;cursor:pointer;transition:border-color .15s}
 .msg-item:hover{border-color:var(--color-border-primary)}
 .msg-item.unread{border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0}
 .msg-body{flex:1;min-width:0}
@@ -76,13 +127,13 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
 .msg-time{font-size:11px;color:var(--color-text-secondary);flex-shrink:0}
 .dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;margin-top:4px}
 
-.profile-header{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem;display:flex;gap:14px;align-items:center}
-.profile-avatar{width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#085041;flex-shrink:0}
+.profile-header{background:linear-gradient(135deg,#E1F5EE,#F0EBF8);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem;display:flex;gap:14px;align-items:center}
+.profile-avatar{width:60px;height:60px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(29,158,117,.3)}
 .profile-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
 .profile-loc{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
 .profile-bio{font-size:13px;color:var(--color-text-secondary);margin-top:6px;line-height:1.5}
 .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.tag{font-size:11px;padding:4px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+.tag{font-size:11px;padding:4px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);background:#fff}
 .section-divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1rem 0}
 .exchange-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
 .exchange-row:last-child{border-bottom:none}
@@ -92,13 +143,14 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
 .exchange-sub{font-size:12px;color:var(--color-text-secondary);margin-top:1px}
 .status-pill{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500}
 </style>
-
-<div class="app">
+</head>
+<body>
+<div class="shell">
 <h2 class="sr-only">Local Skill Exchange Platform — browse, offer, and swap skills with neighbours</h2>
 
 <div class="topbar">
   <div class="logo">skill<span>swap</span></div>
-  <div style="font-size:12px;color:var(--color-text-secondary)">Mysuru, KA</div>
+  <div style="font-size:12px;color:var(--color-text-secondary)">📍 Mysuru, KA</div>
 </div>
 
 <div class="nav-tabs">
@@ -115,7 +167,7 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
     <div class="stat-card"><div class="stat-label">Skills</div><div class="stat-value">61</div><div class="stat-sub">listed today</div></div>
     <div class="stat-card"><div class="stat-label">Swaps</div><div class="stat-value">43</div><div class="stat-sub">this week</div></div>
   </div>
-  <input type="text" placeholder="Search skills or people..." id="searchSkills" oninput="filterSkills()" style="width:100%;margin-bottom:1rem" />
+  <input type="text" placeholder="Search skills or people…" id="searchSkills" oninput="filterSkills()" style="width:100%;margin-bottom:1rem">
   <div class="section-label">Category</div>
   <div class="filter-row" id="filterRow">
     <button class="filter-pill active" onclick="setFilter('all',this)">All</button>
@@ -125,7 +177,7 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
     <button class="filter-pill" onclick="setFilter('wellness',this)">Wellness</button>
     <button class="filter-pill" onclick="setFilter('tutoring',this)">Tutoring</button>
   </div>
-  <div id="skillGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem"></div>
+  <div id="skillGrid"></div>
 </div>
 
 <!-- OFFER -->
@@ -135,7 +187,7 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
 
   <div class="form-group">
     <label class="form-label">Skill title</label>
-    <input type="text" placeholder="e.g. Python tutoring, Saree draping, Guitar lessons" id="skillTitle" style="width:100%" />
+    <input type="text" placeholder="e.g. Python tutoring, Saree draping, Guitar lessons" id="skillTitle" style="width:100%">
   </div>
   <div class="form-group">
     <label class="form-label">Category</label>
@@ -150,7 +202,7 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
   </div>
   <div class="form-group">
     <label class="form-label">Description</label>
-    <textarea placeholder="Describe what you'll offer, your experience level, and how sessions would work..." rows="3" id="skillDesc" style="width:100%;resize:vertical"></textarea>
+    <textarea placeholder="Describe what you'll offer, your experience level, and how sessions would work…" rows="3" id="skillDesc" style="width:100%;resize:vertical"></textarea>
   </div>
   <div class="form-row">
     <div class="form-group" style="margin-bottom:0">
@@ -168,9 +220,9 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
   </div>
   <div class="form-group" style="margin-top:1rem">
     <label class="form-label">I'd love in return</label>
-    <input type="text" placeholder="e.g. Cooking lessons, Yoga sessions, Web design help..." id="skillWant" style="width:100%" />
+    <input type="text" placeholder="e.g. Cooking lessons, Yoga sessions, Web design help…" id="skillWant" style="width:100%">
   </div>
-  <button class="submit-btn" onclick="submitSkill()">List my skill</button>
+  <button class="submit-btn" onclick="submitSkill()">List my skill →</button>
 
   <hr class="section-divider" style="margin-top:1.5rem">
   <div class="section-label" style="margin-bottom:10px">Recent offers from neighbours</div>
@@ -204,7 +256,7 @@ body{font-family:'Instrument Sans',sans-serif;color:var(--color-text-primary)}
     <div class="stat-card"><div class="stat-label">Swaps done</div><div class="stat-value">7</div><div class="stat-sub">4.9 avg rating</div></div>
   </div>
   <div class="section-label" style="margin-bottom:8px">My exchanges</div>
-  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:4px 14px" id="exchangeList"></div>
+  <div style="background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:4px 14px" id="exchangeList"></div>
 </div>
 
 </div>
@@ -267,7 +319,7 @@ function renderSkills() {
   const q = (document.getElementById('searchSkills').value||'').toLowerCase();
   const grid = document.getElementById('skillGrid');
   grid.innerHTML = '';
-  skills.filter(s => (activeFilter==='all'||s.cat===activeFilter) && (!q||s.name.toLowerCase().includes(q)||s.person.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q))).forEach(s => {
+  skills.filter(s=>(activeFilter==='all'||s.cat===activeFilter)&&(!q||s.name.toLowerCase().includes(q)||s.person.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q))).forEach(s=>{
     const d = document.createElement('div');
     d.className = 'skill-card';
     d.innerHTML = `
@@ -293,14 +345,14 @@ function renderSkills() {
 
 function requestSkill(id) {
   const s = skills.find(x=>x.id===id);
-  sendPrompt(`I'd like to request a skill swap with ${s.person} for "${s.name}". What should I say in my first message?`);
+  alert(`Swap request sent to ${s.person} for "${s.name}"!`);
 }
 
 function toggleSave(id) {
   const s = skills.find(x=>x.id===id);
   s.saved = !s.saved;
   const btn = document.getElementById('save-'+id);
-  if(btn) { btn.textContent = s.saved?'♥':'♡'; btn.className='btn-save'+(s.saved?' saved':''); }
+  if(btn){btn.textContent=s.saved?'♥':'♡';btn.className='btn-save'+(s.saved?' saved':'');}
 }
 
 function selCat(el, cat) {
@@ -311,7 +363,7 @@ function selCat(el, cat) {
 
 function submitSkill() {
   const title = document.getElementById('skillTitle').value.trim();
-  if(!title) { document.getElementById('skillTitle').focus(); return; }
+  if(!title){document.getElementById('skillTitle').focus();return;}
   document.getElementById('successBanner').style.display='block';
   document.getElementById('skillTitle').value='';
   document.getElementById('skillDesc').value='';
@@ -323,7 +375,7 @@ function submitSkill() {
 function renderOffers() {
   const list = document.getElementById('offerList');
   list.innerHTML = '';
-  offers.forEach(o => {
+  offers.forEach(o=>{
     const d = document.createElement('div');
     d.className = 'offer-card';
     d.innerHTML = `
@@ -335,7 +387,7 @@ function renderOffers() {
         <div class="offer-desc">${o.desc}</div>
       </div>
       <div class="offer-side">
-        <button class="btn-request" style="width:70px;font-size:11px;padding:6px" onclick="sendPrompt('How do I propose a skill swap for ${o.title} with ${o.person}?')">Connect ↗</button>
+        <button class="btn-request" style="width:70px;font-size:11px;padding:6px">Connect ↗</button>
       </div>
     `;
     list.appendChild(d);
@@ -345,7 +397,7 @@ function renderOffers() {
 function renderMessages() {
   const list = document.getElementById('msgList');
   list.innerHTML = '';
-  messages.forEach(m => {
+  messages.forEach(m=>{
     const d = document.createElement('div');
     d.className = 'msg-item'+(m.unread?' unread':'');
     d.innerHTML = `
@@ -360,7 +412,7 @@ function renderMessages() {
   });
   const pl = document.getElementById('pendingList');
   pl.innerHTML = '';
-  pending.forEach(p => {
+  pending.forEach(p=>{
     const d = document.createElement('div');
     d.className = 'offer-card';
     d.style.marginBottom='8px';
@@ -379,7 +431,7 @@ function renderMessages() {
 function renderExchanges() {
   const el = document.getElementById('exchangeList');
   el.innerHTML = '';
-  exchanges.forEach(e => {
+  exchanges.forEach(e=>{
     const d = document.createElement('div');
     d.className = 'exchange-row';
     d.innerHTML = `
@@ -399,3 +451,5 @@ renderOffers();
 renderMessages();
 renderExchanges();
 </script>
+</body>
+</html>
