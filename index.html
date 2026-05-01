@@ -225,8 +225,7 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
       <a href="#about">About</a>
       <a href="#projects">Work</a>
       <a href="#casestudy">Case study</a>
-      <a href="#concepts">Next projects</a>
-      <a href="#contact">Contact</a>
+<a href="#contact">Contact</a>
       <a href="#" class="nav-cta">Resume ↓</a>
     </div>
   </div>
@@ -297,15 +296,6 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
         <div class="pcard-foot">
           <div class="ptags"><span class="ptag">Product Design</span><span class="ptag">Community UX</span></div>
           <span class="plink">Built →</span>
-        </div>
-      </div>
-      <div class="pcard" onclick="document.getElementById('concepts').scrollIntoView({behavior:'smooth'})">
-        <span class="pbadge pbadge-concept">◈ Concept — AI Feature</span>
-        <h3>JobFill — Smart Autofill</h3>
-        <p>A browser feature that reads your resume and fills job application forms with confidence scores shown per field. One-click corrections train the model. The AI stays legible — not a black box.</p>
-        <div class="pcard-foot">
-          <div class="ptags"><span class="ptag">AI Product</span><span class="ptag">Trust UX</span><span class="ptag">LLM Parsing</span></div>
-          <span class="plink">See concept ↓</span>
         </div>
       </div>
     </div>
@@ -444,39 +434,6 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
   </div>
 </section>
 
-<!-- ── CONCEPTS ── -->
-<section id="concepts">
-  <div class="container">
-    <p class="eyebrow">Next projects</p>
-    <h2>What I'm designing next</h2>
-    <p class="section-desc">Two projects in active development — one redesign, one new AI feature. Both come from real frustrations, not invented briefs.</p>
-    <div class="concepts-grid">
-
-      <div class="ccard">
-        <span class="ccard-n">01</span>
-        <span class="cbadge cbadge-r">UX Redesign</span>
-        <h3>Zomato Refund & Dispute Resolution</h3>
-        <p>When a food order goes wrong, Zomato's resolution flow puts up walls. Users who have legitimate complaints often give up — not because the problem is unsolvable, but because the UX makes the correct path harder than the path of least resistance (accepting a partial refund and moving on). That's not a bug. It's a design choice — and it erodes trust over time.</p>
-        <div class="csect"><h4>The core failure</h4><p>The flow optimises for deflection, not resolution. A chatbot handles every case identically regardless of the actual issue, which is appropriate for maybe 30% of situations. The other 70% need a different path — one that doesn't currently exist.</p></div>
-        <div class="csect"><h4>My approach</h4><p>Map every failure state (wrong item, missing item, cold food, late delivery, no delivery). Design a state-machine UI that matches the user's specific situation before they type a single word. Remove the chatbot from unambiguous, high-confidence scenarios entirely.</p></div>
-        <div class="csect"><h4>Where AI helps</h4><p>Classify the issue type from the order data (delivery time, restaurant history, item mismatch patterns) before the user even opens the support flow. Pre-surface the likely issue: "Your order arrived 44 minutes late — was that a problem?" AI reduces steps, not just keystrokes.</p></div>
-        <div class="csect"><h4>What success looks like</h4><p>Fewer users abandoning the resolution flow. Fewer manual support escalations for cases that are resolvable automatically. Users who feel the app is working for them — which is the only way to build the kind of trust that survives a bad delivery.</p></div>
-      </div>
-
-      <div class="ccard">
-        <span class="ccard-n">02</span>
-        <span class="cbadge cbadge-f">AI Feature</span>
-        <h3>JobFill — Smart Job Application Autofill</h3>
-        <p>The average active job seeker fills the same 20 fields across 50+ applications. ATS forms break standard browser autofill. The cognitive load of retyping identical information again and again doesn't just waste time — it actively discourages people from applying to roles they're qualified for.</p>
-        <div class="csect"><h4>The core failure</h4><p>Current autofill works at the browser level: name, email, address. It doesn't understand resume content, can't interpret "describe a leadership experience in 200 words," and has no model of what the form is actually asking for. The gap between "what autofill can do" and "what job seekers need" is enormous.</p></div>
-        <div class="csect"><h4>My approach</h4><p>A browser extension that parses the user's uploaded resume with an LLM, detects form field intent (not just field names — intent), fills fields with a visible confidence score per field, and highlights low-confidence fills for manual review before submission.</p></div>
-        <div class="csect"><h4>Key UX decision — trust design</h4><p>Every AI-filled field shows a confidence indicator (high / medium / low). Low-confidence fills are highlighted — not silently filled and hoped for the best. One-click correction lets users teach the model what they actually want. Over time, the model improves for that specific user. The AI is legible — users trust it because they understand it, not despite not thinking about it.</p></div>
-        <div class="csect"><h4>What success looks like</h4><p>Application time drops from ~20 minutes to ~5 for returning users. Application volume increases without increasing burnout. And — the harder metric — users report feeling like the tool is on their side, not making decisions for them.</p></div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ── FIGMA LAYOUT GUIDE ── -->
 <section id="figma">
