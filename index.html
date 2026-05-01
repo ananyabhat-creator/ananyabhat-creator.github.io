@@ -3,453 +3,627 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SkillSwap — Mysuru</title>
+<title>Ananya Bhat — Product Designer</title>
+<meta name="description" content="UI/UX designer & CS student building AI-integrated product experiences. Portfolio of Ananya Bhat.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+/* ── Tokens ── */
 :root{
-  --color-text-primary:#111210;
-  --color-text-secondary:#6B7280;
-  --color-background-primary:#FFFFFF;
-  --color-background-secondary:#F5F5F3;
-  --color-border-primary:#C0C0BB;
-  --color-border-secondary:#DEDED9;
-  --color-border-tertiary:#EEEEED;
-  --border-radius-sm:6px;
-  --border-radius-md:10px;
-  --border-radius-lg:14px;
+  --ink:#0D0D14;--ink-2:#44445A;--ink-3:#8A8A9E;
+  --surface:#FFFFFF;--ground:#F6F6F2;
+  --dark:#0D0D14;--dark-2:#16161F;
+  --accent:#5C46FF;--accent-dim:#EAE7FF;
+  --warm:#FF6058;--green:#1DB87A;--green-dim:#E0F5EC;
+  --border:#E6E6E2;--border-dark:#2A2A38;
+  --r:12px;--rl:20px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Instrument Sans',sans-serif;
-  color:var(--color-text-primary);
-  background:linear-gradient(135deg,#E8F5F0 0%,#F0EBF8 50%,#FBF0E8 100%);
-  min-height:100vh;
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  padding:24px 16px 48px;
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',sans-serif;color:var(--ink);background:var(--ground);font-size:16px;line-height:1.6}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15;letter-spacing:-.02em}
+h1{font-size:clamp(2.8rem,7vw,6rem);font-weight:800}
+h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:700}
+h3{font-size:clamp(1.05rem,2vw,1.45rem);font-weight:600}
+h4{font-size:.95rem;font-weight:600}
+p{color:var(--ink-2);line-height:1.75}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(13,13,20,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-dark)}
+.nav-inner{max-width:1100px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:#fff;letter-spacing:-.03em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.55);transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{font-size:13px;font-weight:600;color:var(--dark)!important;background:#fff;border-radius:20px;padding:7px 18px;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* ── Hero ── */
+#hero{background:var(--dark);padding:160px 0 120px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 65% at 72% 38%,rgba(92,70,255,.18),transparent);pointer-events:none}
+.hero-grid{position:absolute;right:0;top:0;bottom:0;width:45%;opacity:.04;background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:28px}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+#hero h1{color:#fff;max-width:820px;margin-bottom:24px}
+#hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(255,255,255,.5);max-width:540px;line-height:1.7;margin-bottom:44px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--r);font-size:14px;font-weight:600;font-family:'Instrument Sans',sans-serif;transition:all .2s;cursor:pointer}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#4835D4;transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* ── Labels ── */
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px}
+.eyebrow-muted{color:rgba(255,255,255,.35)}
+.section-desc{font-size:1.05rem;color:var(--ink-2);max-width:520px;margin-top:12px}
+.section-desc-dark{color:rgba(255,255,255,.45)}
+
+/* ── About ── */
+#about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:start;margin-top:56px}
+.about-bio{font-size:1.05rem;line-height:1.82;color:var(--ink-2);margin-bottom:20px}
+.about-bio strong{color:var(--ink)}
+.brings{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.bring{display:flex;gap:12px;align-items:flex-start;font-size:.93rem;color:var(--ink-2)}
+.bring-ico{width:22px;height:22px;border-radius:6px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
+.detail-stack{display:flex;flex-direction:column;gap:26px}
+.dg h4{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-bottom:10px;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--border);color:var(--ink-2);background:var(--ground)}
+.chip-a{background:var(--accent-dim);border-color:#C4BAFF;color:var(--accent)}
+.chip-g{background:var(--green-dim);border-color:#9DE8C9;color:#0A7A50}
+
+/* ── Projects ── */
+#projects{background:var(--dark)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin-top:52px}
+.pcard{background:var(--dark-2);border:1px solid var(--border-dark);border-radius:var(--rl);padding:28px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden;cursor:pointer}
+.pcard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(92,70,255,.07),transparent);opacity:0;transition:opacity .2s}
+.pcard:hover{border-color:rgba(92,70,255,.5);transform:translateY(-3px)}
+.pcard:hover::after{opacity:1}
+.pbadge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.06em}
+.pbadge-built{background:rgba(29,184,122,.15);color:var(--green)}
+.pbadge-concept{background:rgba(92,70,255,.18);color:#A090FF}
+.pbadge-redesign{background:rgba(255,96,88,.15);color:#FF9080}
+.pcard h3{color:#fff;margin-bottom:8px}
+.pcard p{font-size:.88rem;color:rgba(255,255,255,.42);line-height:1.65;margin-bottom:20px}
+.pcard-foot{display:flex;align-items:center;justify-content:space-between}
+.ptags{display:flex;gap:6px;flex-wrap:wrap}
+.ptag{font-size:11px;color:rgba(255,255,255,.28);background:rgba(255,255,255,.05);padding:3px 9px;border-radius:20px}
+.plink{font-size:13px;font-weight:600;color:var(--accent);white-space:nowrap}
+
+/* ── Case Study ── */
+#casestudy{background:var(--ground)}
+.cs-hero{background:var(--dark);border-radius:24px;padding:52px;margin-bottom:72px;position:relative;overflow:hidden}
+.cs-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 90% at 85% 50%,rgba(92,70,255,.22),transparent)}
+.cs-meta{display:flex;flex-wrap:wrap;gap:36px;margin-top:32px}
+.csmeta label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:5px}
+.csmeta span{font-size:.92rem;color:rgba(255,255,255,.72);font-weight:500}
+.cs-layout{display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start}
+.cs-sidebar{position:sticky;top:80px}
+.cs-sidebar p.label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-bottom:14px;font-weight:700}
+.cs-nav-item{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:.88rem;color:var(--ink-3);border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s}
+.cs-nav-item:hover,.cs-nav-item.on{color:var(--accent);font-weight:500}
+.cs-nav-n{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700}
+.cs-body>div{margin-bottom:60px}
+.cs-body h3{font-size:1.25rem;color:var(--ink);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--accent-dim)}
+.cs-body p{font-size:.95rem;margin-bottom:14px}
+.quote{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:16px 20px;margin:22px 0}
+.quote p{color:var(--ink-2);font-size:.9rem;font-style:italic;margin:0}
+.decisions{list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:18px}
+.decision{background:var(--surface);border-radius:var(--r);padding:22px;border:1px solid var(--border)}
+.dlabel{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px}
+.decision h4{font-size:.95rem;color:var(--ink);margin-bottom:6px}
+.decision p{font-size:.87rem;margin:0}
+.ai-box{background:linear-gradient(135deg,#0D0D14,#161621);border-radius:var(--r);padding:22px;margin:14px 0;border:1px solid var(--border-dark)}
+.ai-box h4{color:#fff;font-size:.92rem;margin-bottom:8px}
+.ai-box p{color:rgba(255,255,255,.5);font-size:.87rem;margin:0}
+.ai-box code{background:rgba(92,70,255,.35);color:#C4B8FF;padding:2px 7px;border-radius:4px;font-size:.82rem;font-family:monospace}
+.lim-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.lim{border-radius:var(--r);padding:16px}
+.lim-bad{background:#FEF2F2;border:1px solid #FCA5A5}
+.lim-bad h4{color:#991B1B;font-size:.87rem;margin-bottom:5px}
+.lim-bad p{font-size:.82rem;color:#7F1D1D;margin:0}
+.lim-good{background:var(--green-dim);border:1px solid #9DE8C9}
+.lim-good h4{color:#065F46;font-size:.87rem;margin-bottom:5px}
+.lim-good p{font-size:.82rem;color:#064E3B;margin:0}
+.flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+.fstep{display:flex;gap:16px;align-items:flex-start;padding-bottom:26px;position:relative}
+.fstep:not(:last-child)::before{content:'';position:absolute;left:17px;top:38px;bottom:0;width:2px;background:var(--border)}
+.fnum{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;flex-shrink:0;position:relative;z-index:1}
+.fbody h4{font-size:.93rem;color:var(--ink);margin-bottom:4px}
+.fbody p{font-size:.87rem;margin:0}
+
+/* ── Concepts ── */
+#concepts{background:var(--surface)}
+.concepts-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:52px}
+.ccard{border:1px solid var(--border);border-radius:var(--rl);padding:36px;background:var(--ground);position:relative;overflow:hidden}
+.ccard-n{font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;color:var(--border);position:absolute;top:16px;right:22px;line-height:1;user-select:none;pointer-events:none}
+.cbadge{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:20px;margin-bottom:18px}
+.cbadge-r{background:#FFF1F0;color:#C0392B}
+.cbadge-f{background:var(--accent-dim);color:var(--accent)}
+.ccard h3{font-size:1.2rem;margin-bottom:10px;color:var(--ink)}
+.ccard>p{font-size:.9rem;color:var(--ink-2);margin-bottom:28px}
+.csect{margin-bottom:18px}
+.csect h4{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:6px;font-weight:700}
+.csect p{font-size:.88rem;color:var(--ink-2);margin:0}
+
+/* ── Honest self-assessment ── */
+#honest{background:var(--dark);padding:88px 0}
+.honest-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px}
+.hcard{background:var(--dark-2);border:1px solid var(--border-dark);border-radius:var(--r);padding:24px}
+.hcard h4{color:#fff;font-size:.93rem;margin-bottom:10px}
+.hcard p{font-size:.87rem;color:rgba(255,255,255,.45);line-height:1.72;margin:0}
+.htag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 9px;border-radius:20px;margin-bottom:10px}
+.htag-s{background:rgba(29,184,122,.2);color:#4DEAA4}
+.htag-w{background:rgba(255,96,88,.18);color:#FF8880}
+
+/* ── Figma guide ── */
+#figma{background:var(--ground);padding:80px 0}
+.figma-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px}
+.fcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.fcard-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--accent-dim);margin-bottom:8px}
+.fcard h4{font-size:.88rem;color:var(--ink);margin-bottom:8px}
+.fcard ul{list-style:none;font-size:.8rem;color:var(--ink-3);display:flex;flex-direction:column;gap:5px}
+.fcard li::before{content:'→ ';color:var(--accent);font-weight:700}
+
+/* ── Recruiter ── */
+#recruiter{background:var(--surface);padding:80px 0}
+.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.rcard{border-radius:var(--r);padding:22px;border:1px solid var(--border)}
+.rcard h4{font-size:.9rem;margin-bottom:8px;color:var(--ink)}
+.rcard p{font-size:.85rem;color:var(--ink-2);margin:0}
+.rcard-y{background:#FFFBEB;border-color:#FDE68A}
+.rcard-y h4{color:#92400E}
+.rcard-n{background:#F0FDF4;border-color:#A7F3D0}
+.rcard-n h4{color:#065F46}
+
+/* ── Contact ── */
+#contact{background:var(--dark);padding:100px 0}
+.contact-wrap{max-width:580px;margin:0 auto;text-align:center}
+.contact-wrap h2{color:#fff;margin-bottom:16px}
+.contact-wrap p{color:rgba(255,255,255,.48);font-size:1.05rem;margin-bottom:44px}
+.clinks{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.clink{display:flex;align-items:center;gap:8px;padding:13px 24px;border-radius:var(--r);border:1px solid rgba(255,255,255,.15);font-size:.92rem;font-weight:500;color:rgba(255,255,255,.7);background:rgba(255,255,255,.05);transition:all .2s}
+.clink:hover{border-color:rgba(255,255,255,.4);color:#fff;transform:translateY(-2px)}
+.clink-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.clink-primary:hover{background:#4835D4;border-color:#4835D4;color:#fff}
+
+/* ── Footer ── */
+footer{background:#080810;padding:28px;text-align:center}
+footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .about-grid,.cs-layout,.concepts-grid,.honest-grid,.figma-grid,.rec-grid{grid-template-columns:1fr}
+  .cs-sidebar{display:none}
+  .figma-grid{grid-template-columns:1fr 1fr}
+  #hero{padding:120px 0 80px}
+  .hero-grid{display:none}
+  section{padding:72px 0}
+  .csmeta{gap:22px}
 }
-.shell{
-  width:100%;
-  max-width:420px;
-  background:#fff;
-  border-radius:24px;
-  box-shadow:0 4px 6px rgba(0,0,0,.04),0 20px 60px rgba(0,0,0,.10);
-  overflow:hidden;
+@media(max-width:500px){
+  .figma-grid,.rec-grid,.lim-grid,.honest-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
 }
-input,textarea,select{
-  font-family:'Instrument Sans',sans-serif;
-  font-size:13px;
-  color:var(--color-text-primary);
-  background:var(--color-background-secondary);
-  border:0.5px solid var(--color-border-secondary);
-  border-radius:var(--border-radius-md);
-  padding:9px 12px;
-  outline:none;
-  transition:border-color .15s,box-shadow .15s;
-}
-input:focus,textarea:focus,select:focus{
-  border-color:#1D9E75;
-  box-shadow:0 0 0 3px rgba(29,158,117,.12);
-  background:#fff;
-}
-input::placeholder,textarea::placeholder{color:#B0B5BB}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-.screen{display:none}
-.screen.active{display:block}
-
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem 0.5rem}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--color-text-primary);letter-spacing:-0.5px}
-.logo span{color:#1D9E75}
-.nav-tabs{display:flex;gap:2px;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:3px;margin:0 1.25rem 1rem}
-.nav-tab{flex:1;padding:7px 4px;border:none;background:transparent;font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-radius:var(--border-radius-md);transition:all .18s;font-weight:400}
-.nav-tab.active{background:#fff;color:var(--color-text-primary);font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,.08);border:0.5px solid var(--color-border-tertiary)}
-
-.content{padding:0 1.25rem 1.5rem}
-
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
-.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem 1rem}
-.stat-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
-.stat-value{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--color-text-primary)}
-.stat-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
-
-.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
-.filter-pill{padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
-.filter-pill.active{background:#E1F5EE;border-color:#5DCAA5;color:#085041;font-weight:500}
-.filter-pill:hover{background:var(--color-background-secondary)}
-
-#skillGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
-.skill-card{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.skill-card:hover{border-color:#5DCAA5;box-shadow:0 4px 16px rgba(29,158,117,.1)}
-.skill-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
-.avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;flex-shrink:0}
-.badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap}
-.skill-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;margin-bottom:3px;color:var(--color-text-primary)}
-.skill-person{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
-.skill-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px}
-.skill-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--color-text-secondary)}
-.stars{color:#BA7517;font-size:12px;letter-spacing:1px}
-.skill-actions{display:flex;gap:6px;margin-top:10px}
-.btn-request{flex:1;padding:7px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:background .15s}
-.btn-request:hover{background:#0F6E56}
-.btn-save{width:34px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:15px;color:var(--color-text-secondary);transition:all .15s;display:flex;align-items:center;justify-content:center}
-.btn-save.saved{color:#E24B4A;border-color:#F09595}
-.btn-save:hover{background:var(--color-background-secondary)}
-
-.offer-card{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
-.offer-body{flex:1;min-width:0}
-.offer-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
-.offer-person{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
-.offer-wants{font-size:12px;padding:4px 10px;border-radius:20px;background:#EEEDFE;color:#534AB7;display:inline-block;margin-bottom:6px}
-.offer-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
-.offer-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
-
-.form-group{margin-bottom:1rem}
-.form-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.cat-select-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
-.cat-opt{padding:8px 6px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;font-size:12px;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:all .15s;font-family:'Instrument Sans',sans-serif}
-.cat-opt.selected{border-color:#1D9E75;background:#E1F5EE;color:#085041;font-weight:500}
-.cat-opt:hover{background:var(--color-background-secondary)}
-.submit-btn{width:100%;padding:11px;border-radius:var(--border-radius-md);border:none;background:#1D9E75;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:background .15s,box-shadow .15s;margin-top:4px}
-.submit-btn:hover{background:#0F6E56;box-shadow:0 4px 16px rgba(29,158,117,.3)}
-.success-banner{background:#E1F5EE;border:0.5px solid #5DCAA5;border-radius:var(--border-radius-md);padding:12px 14px;font-size:13px;color:#085041;margin-bottom:1rem;display:none}
-
-.msg-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
-.msg-item{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;display:flex;gap:10px;cursor:pointer;transition:border-color .15s}
-.msg-item:hover{border-color:var(--color-border-primary)}
-.msg-item.unread{border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0}
-.msg-body{flex:1;min-width:0}
-.msg-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
-.msg-preview{font-size:12px;color:var(--color-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.msg-time{font-size:11px;color:var(--color-text-secondary);flex-shrink:0}
-.dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;margin-top:4px}
-
-.profile-header{background:linear-gradient(135deg,#E1F5EE,#F0EBF8);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem;display:flex;gap:14px;align-items:center}
-.profile-avatar{width:60px;height:60px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(29,158,117,.3)}
-.profile-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
-.profile-loc{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
-.profile-bio{font-size:13px;color:var(--color-text-secondary);margin-top:6px;line-height:1.5}
-.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.tag{font-size:11px;padding:4px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);background:#fff}
-.section-divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1rem 0}
-.exchange-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
-.exchange-row:last-child{border-bottom:none}
-.exchange-badge{width:36px;height:36px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.exchange-info{flex:1}
-.exchange-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
-.exchange-sub{font-size:12px;color:var(--color-text-secondary);margin-top:1px}
-.status-pill{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500}
 </style>
 </head>
 <body>
-<div class="shell">
-<h2 class="sr-only">Local Skill Exchange Platform — browse, offer, and swap skills with neighbours</h2>
 
-<div class="topbar">
-  <div class="logo">skill<span>swap</span></div>
-  <div style="font-size:12px;color:var(--color-text-secondary)">📍 Mysuru, KA</div>
-</div>
-
-<div class="nav-tabs">
-  <button class="nav-tab active" onclick="showScreen('browse',this)">Browse</button>
-  <button class="nav-tab" onclick="showScreen('offer',this)">Offer</button>
-  <button class="nav-tab" onclick="showScreen('messages',this)">Messages</button>
-  <button class="nav-tab" onclick="showScreen('profile',this)">Profile</button>
-</div>
-
-<!-- BROWSE -->
-<div class="screen active content" id="browse">
-  <div class="stat-row">
-    <div class="stat-card"><div class="stat-label">Members</div><div class="stat-value">284</div><div class="stat-sub">in your area</div></div>
-    <div class="stat-card"><div class="stat-label">Skills</div><div class="stat-value">61</div><div class="stat-sub">listed today</div></div>
-    <div class="stat-card"><div class="stat-label">Swaps</div><div class="stat-value">43</div><div class="stat-sub">this week</div></div>
-  </div>
-  <input type="text" placeholder="Search skills or people…" id="searchSkills" oninput="filterSkills()" style="width:100%;margin-bottom:1rem">
-  <div class="section-label">Category</div>
-  <div class="filter-row" id="filterRow">
-    <button class="filter-pill active" onclick="setFilter('all',this)">All</button>
-    <button class="filter-pill" onclick="setFilter('tech',this)">Tech</button>
-    <button class="filter-pill" onclick="setFilter('creative',this)">Creative</button>
-    <button class="filter-pill" onclick="setFilter('home',this)">Home</button>
-    <button class="filter-pill" onclick="setFilter('wellness',this)">Wellness</button>
-    <button class="filter-pill" onclick="setFilter('tutoring',this)">Tutoring</button>
-  </div>
-  <div id="skillGrid"></div>
-</div>
-
-<!-- OFFER -->
-<div class="screen content" id="offer">
-  <div class="success-banner" id="successBanner">Your skill has been listed! Others in your area can now find and request it.</div>
-  <div class="section-label" style="margin-bottom:1rem">List a skill you can offer</div>
-
-  <div class="form-group">
-    <label class="form-label">Skill title</label>
-    <input type="text" placeholder="e.g. Python tutoring, Saree draping, Guitar lessons" id="skillTitle" style="width:100%">
-  </div>
-  <div class="form-group">
-    <label class="form-label">Category</label>
-    <div class="cat-select-grid" id="catGrid">
-      <div class="cat-opt selected" onclick="selCat(this,'tech')">Tech</div>
-      <div class="cat-opt" onclick="selCat(this,'creative')">Creative</div>
-      <div class="cat-opt" onclick="selCat(this,'home')">Home</div>
-      <div class="cat-opt" onclick="selCat(this,'wellness')">Wellness</div>
-      <div class="cat-opt" onclick="selCat(this,'tutoring')">Tutoring</div>
-      <div class="cat-opt" onclick="selCat(this,'other')">Other</div>
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">A<span>.</span>Bhat</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#casestudy">Case study</a>
+      <a href="#concepts">Next projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="nav-cta">Resume ↓</a>
     </div>
   </div>
-  <div class="form-group">
-    <label class="form-label">Description</label>
-    <textarea placeholder="Describe what you'll offer, your experience level, and how sessions would work…" rows="3" id="skillDesc" style="width:100%;resize:vertical"></textarea>
-  </div>
-  <div class="form-row">
-    <div class="form-group" style="margin-bottom:0">
-      <label class="form-label">Duration</label>
-      <select id="skillDur" style="width:100%">
-        <option>30 min</option><option>1 hour</option><option>2 hours</option><option>Flexible</option>
-      </select>
-    </div>
-    <div class="form-group" style="margin-bottom:0">
-      <label class="form-label">Format</label>
-      <select id="skillFmt" style="width:100%">
-        <option>In person</option><option>Online</option><option>Both</option>
-      </select>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-tag"><span class="hero-dot"></span>Open to internships & junior roles — 2025</div>
+    <h1>Ananya<br><em>Bhat</em></h1>
+    <p class="hero-sub">Product designer working at the edge of UX and AI. I research problems, design decisions, and build working prototypes — not just screens.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">See my work →</a>
+      <a href="#about" class="btn btn-ghost">About me</a>
     </div>
   </div>
-  <div class="form-group" style="margin-top:1rem">
-    <label class="form-label">I'd love in return</label>
-    <input type="text" placeholder="e.g. Cooking lessons, Yoga sessions, Web design help…" id="skillWant" style="width:100%">
-  </div>
-  <button class="submit-btn" onclick="submitSkill()">List my skill →</button>
+</section>
 
-  <hr class="section-divider" style="margin-top:1.5rem">
-  <div class="section-label" style="margin-bottom:10px">Recent offers from neighbours</div>
-  <div id="offerList"></div>
-</div>
-
-<!-- MESSAGES -->
-<div class="screen content" id="messages">
-  <div class="section-label" style="margin-bottom:10px">Conversations</div>
-  <div class="msg-list" id="msgList"></div>
-  <hr class="section-divider">
-  <div class="section-label" style="margin-bottom:10px">Pending requests</div>
-  <div id="pendingList"></div>
-</div>
-
-<!-- PROFILE -->
-<div class="screen content" id="profile">
-  <div class="profile-header">
-    <div class="profile-avatar">AK</div>
-    <div>
-      <div class="profile-name">Ananya Kumar</div>
-      <div class="profile-loc">Jayalakshmipuram, Mysuru</div>
-      <div class="profile-bio">Designer & Bharatanatyam dancer. Love learning new things and sharing what I know.</div>
-      <div class="tag-list">
-        <span class="tag">UI Design</span><span class="tag">Bharatanatyam</span><span class="tag">Kannada</span>
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <p class="eyebrow">About</p>
+    <h2>CS student who designs.<br>Designer who can ship.</h2>
+    <div class="about-grid">
+      <div>
+        <p class="about-bio">I'm pursuing a <strong>B.E. in Computer Science and Design</strong> (2023–2027), which means I spend half my time thinking about systems and the other half thinking about people. That overlap is where I want to build a career.</p>
+        <p class="about-bio">My CS background lets me read API docs, understand state management, and have real conversations with engineers about what's actually feasible. My design training means I don't just wireframe — I ask why the screen exists before I design it.</p>
+        <p class="about-bio">I've shipped one AI-integrated product (an interview coach built with the Gemini API). I've worked through full UX cycles — problem framing, research, prototyping, testing — in academic and personal projects. <strong>I'm early in my career, but I think carefully and document my decisions.</strong></p>
+        <ul class="brings">
+          <li class="bring"><div class="bring-ico">⚡</div><span>I can prototype in code, not just in Figma — shortening the design-to-feedback loop without a developer dependency</span></li>
+          <li class="bring"><div class="bring-ico">🧠</div><span>I've worked directly with LLM APIs — I design AI features around real model constraints, not imagined ones</span></li>
+          <li class="bring"><div class="bring-ico">📐</div><span>Trained in UX research methods: user interviews, personas, journey mapping, usability testing</span></li>
+          <li class="bring"><div class="bring-ico">📝</div><span>I document the "why" behind decisions — because decisions that can't be explained can't survive a design crit</span></li>
+        </ul>
+      </div>
+      <div class="detail-stack">
+        <div class="dg"><h4>Design tools</h4><div class="chips"><span class="chip chip-a">Figma</span><span class="chip chip-a">FigJam</span><span class="chip">Canva</span><span class="chip">Adobe Photoshop</span><span class="chip">Adobe Illustrator</span></div></div>
+        <div class="dg"><h4>Build tools</h4><div class="chips"><span class="chip">HTML / CSS</span><span class="chip">Tailwind CSS</span><span class="chip">JavaScript</span></div></div>
+        <div class="dg"><h4>AI tools I use with intent</h4><div class="chips"><span class="chip chip-g">Gemini API — shipped</span><span class="chip chip-g">ChatGPT</span><span class="chip chip-g">Midjourney</span><span class="chip chip-g">DALL·E</span></div></div>
+        <div class="dg"><h4>UX methods</h4><div class="chips"><span class="chip">User research</span><span class="chip">Personas</span><span class="chip">Journey mapping</span><span class="chip">Usability testing</span><span class="chip">Information architecture</span></div></div>
+        <div class="dg"><h4>Currently learning</h4><div class="chips"><span class="chip">Design systems</span><span class="chip">AI interaction patterns</span><span class="chip">Accessibility (WCAG)</span></div></div>
       </div>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
-    <div class="stat-card"><div class="stat-label">Skills offered</div><div class="stat-value">3</div></div>
-    <div class="stat-card"><div class="stat-label">Swaps done</div><div class="stat-value">7</div><div class="stat-sub">4.9 avg rating</div></div>
-  </div>
-  <div class="section-label" style="margin-bottom:8px">My exchanges</div>
-  <div style="background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:4px 14px" id="exchangeList"></div>
-</div>
+</section>
 
-</div>
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <p class="eyebrow eyebrow-muted">Selected work</p>
+    <h2 style="color:#fff">What I've built & what I'm designing</h2>
+    <p class="section-desc section-desc-dark">Two shipped projects. Two in active development. Every card links to the full write-up or concept.</p>
+    <div class="projects-grid">
+      <div class="pcard" onclick="document.getElementById('casestudy').scrollIntoView({behavior:'smooth'})">
+        <span class="pbadge pbadge-built">● Shipped</span>
+        <h3>AI Interview Coach</h3>
+        <p>A conversational web app that simulates job interviews using Gemini API, gives structured per-dimension feedback, and adapts follow-up questions to what the user actually said — not a random question queue.</p>
+        <div class="pcard-foot">
+          <div class="ptags"><span class="ptag">UX Design</span><span class="ptag">AI Integration</span><span class="ptag">Gemini API</span></div>
+          <span class="plink">Case study ↓</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <span class="pbadge pbadge-built">● Shipped</span>
+        <h3>SkillSwap</h3>
+        <p>A local skill-exchange platform concept for Mysuru — browse skills offered by neighbours, post your own, and coordinate barter sessions without money. Designed and built end-to-end.</p>
+        <div class="pcard-foot">
+          <div class="ptags"><span class="ptag">Product Design</span><span class="ptag">Community UX</span></div>
+          <span class="plink">Built →</span>
+        </div>
+      </div>
+      <div class="pcard" onclick="document.getElementById('concepts').scrollIntoView({behavior:'smooth'})">
+        <span class="pbadge pbadge-redesign">◐ Concept — Redesign</span>
+        <h3>Zomato Refund Flow</h3>
+        <p>Redesigning a broken experience: food delivery dispute resolution. The current flow is adversarial toward users. I'm mapping every failure state and designing the exit paths that should exist but don't.</p>
+        <div class="pcard-foot">
+          <div class="ptags"><span class="ptag">UX Audit</span><span class="ptag">Flow Redesign</span><span class="ptag">AI Triage</span></div>
+          <span class="plink">See concept ↓</span>
+        </div>
+      </div>
+      <div class="pcard" onclick="document.getElementById('concepts').scrollIntoView({behavior:'smooth'})">
+        <span class="pbadge pbadge-concept">◈ Concept — AI Feature</span>
+        <h3>JobFill — Smart Autofill</h3>
+        <p>A browser feature that reads your resume and fills job application forms with confidence scores shown per field. One-click corrections train the model. The AI stays legible — not a black box.</p>
+        <div class="pcard-foot">
+          <div class="ptags"><span class="ptag">AI Product</span><span class="ptag">Trust UX</span><span class="ptag">LLM Parsing</span></div>
+          <span class="plink">See concept ↓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDY ── -->
+<section id="casestudy">
+  <div class="container">
+    <p class="eyebrow">Case study — deep dive</p>
+
+    <div class="cs-hero">
+      <p style="font-size:.82rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Featured project · Solo · 2024</p>
+      <h2 style="color:#fff;font-size:clamp(1.6rem,4vw,2.8rem)">AI Interview Coach</h2>
+      <p style="color:rgba(255,255,255,.48);font-size:1rem;margin-top:10px;max-width:520px;line-height:1.7">A conversational web app that simulates realistic job interview environments and gives AI-generated, structured feedback — without a human on the other side.</p>
+      <div class="cs-meta">
+        <div class="csmeta"><label>My role</label><span>Solo designer + developer</span></div>
+        <div class="csmeta"><label>Timeline</label><span>6 weeks</span></div>
+        <div class="csmeta"><label>Stack</label><span>HTML, Tailwind CSS, JavaScript, Gemini API</span></div>
+        <div class="csmeta"><label>Status</label><span>Shipped — v1 live</span></div>
+      </div>
+    </div>
+
+    <div class="cs-layout">
+      <aside class="cs-sidebar">
+        <p class="label">Contents</p>
+        <div class="cs-nav-item on"><span class="cs-nav-n">01</span> The problem</div>
+        <div class="cs-nav-item"><span class="cs-nav-n">02</span> How it works</div>
+        <div class="cs-nav-item"><span class="cs-nav-n">03</span> UX decisions</div>
+        <div class="cs-nav-item"><span class="cs-nav-n">04</span> AI logic</div>
+        <div class="cs-nav-item"><span class="cs-nav-n">05</span> Limitations</div>
+        <div class="cs-nav-item"><span class="cs-nav-n">06</span> What I learned</div>
+      </aside>
+
+      <div class="cs-body">
+
+        <div id="cs1">
+          <h3>01 — The Problem</h3>
+          <p>Most people who struggle in job interviews don't lack knowledge. They lack <strong>practice under realistic conditions</strong>. A question you can answer calmly at your desk feels different when a stranger is watching the clock.</p>
+          <p>The options available today are expensive (coaching: ₹2,000–₹10,000 per session), logistically difficult (peer mock interviews require a willing, domain-knowledgeable friend), or too passive (watching YouTube tips doesn't build any kind of muscle memory).</p>
+          <div class="quote"><p>"The problem isn't information scarcity — it's the absence of a safe, repeatable space to fail in before it counts."</p></div>
+          <p>This is the gap the AI Interview Coach targets: accessible, on-demand, judgment-free practice with feedback comparable to a coached session — at zero cost. The target user is a final-year student or early-career professional preparing for their first or second serious role.</p>
+        </div>
+
+        <div id="cs2">
+          <h3>02 — How It Works</h3>
+          <div class="flow">
+            <div class="fstep">
+              <div class="fnum">1</div>
+              <div class="fbody"><h4>Role & context setup</h4><p>User picks a job role (e.g. "Product Manager — early-stage startup") and experience level. This seeds the system prompt that shapes the interviewer persona, question difficulty, and evaluation criteria — so the session is calibrated to the user's target, not generic.</p></div>
+            </div>
+            <div class="fstep">
+              <div class="fnum">2</div>
+              <div class="fbody"><h4>Live interview simulation</h4><p>Gemini API acts as the interviewer. Each turn generates a context-aware follow-up based on the user's previous answer — maintaining a conversational thread rather than pulling from a random queue. The model is instructed to probe gaps, not change topics arbitrarily.</p></div>
+            </div>
+            <div class="fstep">
+              <div class="fnum">3</div>
+              <div class="fbody"><h4>Structured answer evaluation</h4><p>After each answer, the model scores it across three dimensions: Clarity (was it easy to follow?), Specificity (were claims backed by detail?), and Relevance (did it actually answer the question?). Scores are returned as structured data — not a paragraph — so the UI renders them consistently every time.</p></div>
+            </div>
+            <div class="fstep">
+              <div class="fnum">4</div>
+              <div class="fbody"><h4>Session synthesis</h4><p>After 5–8 questions, the model generates a wrap-up: patterns it noticed across answers, the strongest moment, and 2–3 concrete things to practice before the real interview. This is the output users reported finding most valuable in informal testing.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="cs3">
+          <h3>03 — UX Decisions & Why</h3>
+          <ul class="decisions">
+            <li class="decision">
+              <div class="dlabel">Decision 01</div>
+              <h4>No typing indicator / "AI is thinking" animation</h4>
+              <p>I removed the standard loading spinner. In a real interview, the other person doesn't signal they're processing your answer — there's just a pause. Removing the loading state made the experience feel less like a chatbot and more like a conversation. Three informal testers unprompted said it "felt more real."</p>
+            </li>
+            <li class="decision">
+              <div class="dlabel">Decision 02</div>
+              <h4>Enforced structured output via system prompt — not post-processed</h4>
+              <p>Early versions returned free-form feedback paragraphs that varied wildly in length and tone. I added a strict output schema directly in the system prompt (format: <code>clarity:N | specificity:N | note:…</code>). JavaScript parses this predictably. If the model breaks format (it occasionally does), there's a fallback to raw text — but I documented that failure state rather than pretending it doesn't exist.</p>
+            </li>
+            <li class="decision">
+              <div class="dlabel">Decision 03</div>
+              <h4>Fully generated questions — no question bank</h4>
+              <p>I chose generative questions over a curated database. This means every session genuinely differs and avoids the "I've seen this one before" problem that kills the training value of any repeat use. The tradeoff is occasional off-topic or poorly-calibrated questions. I document this openly rather than hiding it.</p>
+            </li>
+            <li class="decision">
+              <div class="dlabel">Decision 04</div>
+              <h4>Context window truncation after 3 exchanges</h4>
+              <p>Gemini processes the full conversation history per API call. After 5 turns, latency and cost climb noticeably. I truncated the live context to the last 3 exchanges while keeping the original system prompt intact — preserving role calibration and question tone without sending the full session on every call. This was an explicit product decision with a real tradeoff that I had to name and document.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div id="cs4">
+          <h3>04 — How AI Is Used (Specifically)</h3>
+          <div class="ai-box">
+            <h4>Dynamic system prompt construction</h4>
+            <p>The model doesn't receive a static template. The system prompt is built at runtime from the user's setup choices: role, seniority, and interview type. This means the "PM at a startup" and "SDE at a large company" sessions have meaningfully different contexts — not just a different label on the same prompt.</p>
+          </div>
+          <div class="ai-box">
+            <h4>Output structure enforcement</h4>
+            <p>Rather than "give feedback on this answer," the prompt instructs the model to return structured output: <code>clarity: N, specificity: N, note: "…"</code>. JS parses this directly into UI components. This gives the interface predictability and keeps the feedback scannable — not a wall of AI text.</p>
+          </div>
+          <div class="ai-box">
+            <h4>Context-aware follow-up question logic</h4>
+            <p>The system prompt includes: <em>"Generate the next question by probing a gap or undeveloped thread in the candidate's last answer."</em> If a user says "I used Agile" without elaborating, the model asks specifically about sprint planning or retrospectives — rather than moving to an unrelated topic. This makes sessions feel like real interviews, not surveys.</p>
+          </div>
+          <div class="ai-box">
+            <h4>What AI does NOT touch</h4>
+            <p>UI rendering, session state, navigation, and error handling are all plain JavaScript. AI handles three things only: question generation, answer evaluation, and session synthesis. This was a deliberate scope decision — keeping the AI layer thin, fast, auditable, and replaceable if a better model comes along.</p>
+          </div>
+        </div>
+
+        <div id="cs5">
+          <h3>05 — Limitations (Honest)</h3>
+          <div class="lim-grid">
+            <div class="lim lim-bad"><h4>No voice input</h4><p>Typing an answer is fundamentally different from speaking one. The product sidesteps the core anxiety of verbal delivery — which is the thing most people actually need to practice.</p></div>
+            <div class="lim lim-bad"><h4>AI hallucinations in feedback</h4><p>The model occasionally gives feedback that contradicts what the user actually said. There's no ground-truth checking layer. Users need to know this, not be surprised by it.</p></div>
+            <div class="lim lim-bad"><h4>No domain-specific calibration</h4><p>"PM at fintech" and "PM at gaming" should produce different interview depth. The current system doesn't handle industry specialisation well.</p></div>
+            <div class="lim lim-bad"><h4>No session memory</h4><p>Users can't track improvement over time. There's no comparison between session 1 and session 5. Without that, the coaching value plateau is invisible.</p></div>
+            <div class="lim lim-good"><h4>Next: Web Speech API</h4><p>Browser-native speech-to-text for voice answers. No third-party SDK required — available in all modern browsers.</p></div>
+            <div class="lim lim-good"><h4>Next: Confidence indicators</h4><p>Show which parts of feedback the model inferred vs. read directly — so users trust the feedback because they understand it, not despite not understanding it.</p></div>
+            <div class="lim lim-good"><h4>Next: Role-specific rubrics</h4><p>Pre-built evaluation criteria for 5 common roles (PM, SDE, Designer, Data Analyst, Consultant) to improve feedback precision where it matters most.</p></div>
+            <div class="lim lim-good"><h4>Next: localStorage sessions</h4><p>Save summaries locally so users can compare their own sessions week over week without requiring a backend or login.</p></div>
+          </div>
+        </div>
+
+        <div id="cs6">
+          <h3>06 — What I Learned</h3>
+          <p>The hardest design problem wasn't the interface — it was <strong>managing user expectations of the AI</strong>. When a model gives you feedback on your answer, the instinct is to trust it completely. But LLMs can be confidently wrong. The real design challenge is communicating "this is useful signal, not ground truth" without undermining the product's entire value proposition.</p>
+          <p>I also learned that <strong>prompt engineering is a design practice</strong>, not a developer task. The structure, tone, constraints, and examples you put in a system prompt directly shape what users experience — it deserves the same iteration and documentation that a design component does.</p>
+          <div class="quote"><p>"If I redid this project, I'd run 5 user interviews before writing a line of code. I built because I thought I understood the problem. I mostly did — but I made assumptions that cost me time I could have spent earlier."</p></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONCEPTS ── -->
+<section id="concepts">
+  <div class="container">
+    <p class="eyebrow">Next projects</p>
+    <h2>What I'm designing next</h2>
+    <p class="section-desc">Two projects in active development — one redesign, one new AI feature. Both come from real frustrations, not invented briefs.</p>
+    <div class="concepts-grid">
+
+      <div class="ccard">
+        <span class="ccard-n">01</span>
+        <span class="cbadge cbadge-r">UX Redesign</span>
+        <h3>Zomato Refund & Dispute Resolution</h3>
+        <p>When a food order goes wrong, Zomato's resolution flow puts up walls. Users who have legitimate complaints often give up — not because the problem is unsolvable, but because the UX makes the correct path harder than the path of least resistance (accepting a partial refund and moving on). That's not a bug. It's a design choice — and it erodes trust over time.</p>
+        <div class="csect"><h4>The core failure</h4><p>The flow optimises for deflection, not resolution. A chatbot handles every case identically regardless of the actual issue, which is appropriate for maybe 30% of situations. The other 70% need a different path — one that doesn't currently exist.</p></div>
+        <div class="csect"><h4>My approach</h4><p>Map every failure state (wrong item, missing item, cold food, late delivery, no delivery). Design a state-machine UI that matches the user's specific situation before they type a single word. Remove the chatbot from unambiguous, high-confidence scenarios entirely.</p></div>
+        <div class="csect"><h4>Where AI helps</h4><p>Classify the issue type from the order data (delivery time, restaurant history, item mismatch patterns) before the user even opens the support flow. Pre-surface the likely issue: "Your order arrived 44 minutes late — was that a problem?" AI reduces steps, not just keystrokes.</p></div>
+        <div class="csect"><h4>What success looks like</h4><p>Fewer users abandoning the resolution flow. Fewer manual support escalations for cases that are resolvable automatically. Users who feel the app is working for them — which is the only way to build the kind of trust that survives a bad delivery.</p></div>
+      </div>
+
+      <div class="ccard">
+        <span class="ccard-n">02</span>
+        <span class="cbadge cbadge-f">AI Feature</span>
+        <h3>JobFill — Smart Job Application Autofill</h3>
+        <p>The average active job seeker fills the same 20 fields across 50+ applications. ATS forms break standard browser autofill. The cognitive load of retyping identical information again and again doesn't just waste time — it actively discourages people from applying to roles they're qualified for.</p>
+        <div class="csect"><h4>The core failure</h4><p>Current autofill works at the browser level: name, email, address. It doesn't understand resume content, can't interpret "describe a leadership experience in 200 words," and has no model of what the form is actually asking for. The gap between "what autofill can do" and "what job seekers need" is enormous.</p></div>
+        <div class="csect"><h4>My approach</h4><p>A browser extension that parses the user's uploaded resume with an LLM, detects form field intent (not just field names — intent), fills fields with a visible confidence score per field, and highlights low-confidence fills for manual review before submission.</p></div>
+        <div class="csect"><h4>Key UX decision — trust design</h4><p>Every AI-filled field shows a confidence indicator (high / medium / low). Low-confidence fills are highlighted — not silently filled and hoped for the best. One-click correction lets users teach the model what they actually want. Over time, the model improves for that specific user. The AI is legible — users trust it because they understand it, not despite not thinking about it.</p></div>
+        <div class="csect"><h4>What success looks like</h4><p>Application time drops from ~20 minutes to ~5 for returning users. Application volume increases without increasing burnout. And — the harder metric — users report feeling like the tool is on their side, not making decisions for them.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FIGMA LAYOUT GUIDE ── -->
+<section id="figma">
+  <div class="container">
+    <p class="eyebrow">For my Figma file</p>
+    <h2>How to structure each section in Figma</h2>
+    <p class="section-desc">Layout and visual hierarchy notes — what to show, how to structure it, what makes it scannable to a recruiter in under 30 seconds.</p>
+    <div class="figma-grid">
+      <div class="fcard">
+        <div class="fcard-num">01</div>
+        <h4>Hero / Landing</h4>
+        <ul>
+          <li>Name in large Syne weight</li>
+          <li>2-line role description</li>
+          <li>2 CTAs side by side</li>
+          <li>Dark background, accent gradient</li>
+          <li>No hero image — typography does the work</li>
+        </ul>
+      </div>
+      <div class="fcard">
+        <div class="fcard-num">02</div>
+        <h4>About</h4>
+        <ul>
+          <li>2-column: bio left, tools right</li>
+          <li>Chips for tool groupings</li>
+          <li>3–4 bullet "what I bring"</li>
+          <li>Photo optional — only if high quality</li>
+          <li>Keep bio under 120 words</li>
+        </ul>
+      </div>
+      <div class="fcard">
+        <div class="fcard-num">03</div>
+        <h4>Projects</h4>
+        <ul>
+          <li>2×2 card grid</li>
+          <li>Badge: Built vs Concept</li>
+          <li>Dark background for contrast</li>
+          <li>Card: title, 2-line desc, tags, CTA</li>
+          <li>Hover state on cards</li>
+        </ul>
+      </div>
+      <div class="fcard">
+        <div class="fcard-num">04</div>
+        <h4>Case Study</h4>
+        <ul>
+          <li>Sticky left nav for sections</li>
+          <li>Section headers with accent underline</li>
+          <li>Quote callouts for insight moments</li>
+          <li>AI sections in dark background cards</li>
+          <li>Limitations: red/green 2-col grid</li>
+        </ul>
+      </div>
+      <div class="fcard">
+        <div class="fcard-num">05</div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Dark background — creates closure</li>
+          <li>Centred layout</li>
+          <li>Email as primary CTA button</li>
+          <li>LinkedIn + GitHub as secondary</li>
+          <li>1 sentence on what you're looking for</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RECRUITER NOTES ── -->
+<section id="recruiter">
+  <div class="container">
+    <p class="eyebrow">What recruiters will look for</p>
+    <h2>The checklist a hiring manager runs</h2>
+    <p class="section-desc">A UX or product design recruiter spends ~90 seconds on a portfolio before deciding to read further. Here's what they're actually checking — and how this portfolio addresses (or doesn't address) each one.</p>
+    <div class="rec-grid">
+      <div class="rcard rcard-n"><h4>✓ Can they explain decisions?</h4><p>Yes — every project here documents not just what was built, but why one option was chosen over others, what was rejected, and what the tradeoffs were.</p></div>
+      <div class="rcard rcard-n"><h4>✓ Have they shipped anything?</h4><p>Yes — two live products: the AI Interview Coach and SkillSwap. Both are accessible, not mockups. This matters more than a polished Figma deck that was never tested.</p></div>
+      <div class="rcard rcard-n"><h4>✓ Do they understand AI beyond surface level?</h4><p>Yes — the case study details API architecture, prompt engineering decisions, context management, and failure state handling. This is practical AI knowledge, not trend adoption.</p></div>
+      <div class="rcard rcard-y"><h4>⚠ Do they have user research documentation?</h4><p>Not yet in portfolio-quality format. Research was done but not documented in a shareable artefact. Next priority: affinity maps and persona documentation for the next project.</p></div>
+      <div class="rcard rcard-y"><h4>⚠ Is there visual design range?</h4><p>The work is clean and functional, but the visual design vocabulary is limited to one aesthetic. Developing range across different visual styles is a stated goal for the next 6 months.</p></div>
+      <div class="rcard rcard-n"><h4>✓ Are they self-aware?</h4><p>Yes — the portfolio explicitly names gaps and states how they're being addressed. Recruiters distrust candidates who claim no weaknesses. Self-awareness signals coachability.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HONEST SELF-ASSESSMENT ── -->
+<section id="honest" style="background:var(--dark);padding:88px 0">
+  <div class="container">
+    <p class="eyebrow eyebrow-muted">Honest self-assessment</p>
+    <h2 style="color:#fff">What I have, what I lack,<br>what I'm actively fixing</h2>
+    <p style="color:rgba(255,255,255,.4);max-width:520px;margin-top:12px;line-height:1.7">A hiring manager reading this portfolio would have hard questions. Here are the honest answers.</p>
+    <div class="honest-grid">
+      <div class="hcard"><span class="htag htag-s">Strength</span><h4>I can design and build</h4><p>Most design students can't open a code editor. I've shipped products with API integrations. This means I can prototype at high fidelity without a developer, and I understand engineering constraints at a level that makes collaboration faster.</p></div>
+      <div class="hcard"><span class="htag htag-s">Strength</span><h4>I understand AI at a system level</h4><p>I've worked directly with LLM APIs — prompt engineering, context management, failure handling. This is increasingly rare in designers and directly relevant to any team building AI-native products or features.</p></div>
+      <div class="hcard"><span class="htag htag-s">Strength</span><h4>I document the "why"</h4><p>Every decision in this portfolio has a reason attached. I show what I considered and rejected, what tradeoffs I made, and what I'd change. Teams that have design crits need people who can defend their decisions under questioning.</p></div>
+      <div class="hcard"><span class="htag htag-w">Gap — aware, working on it</span><h4>No industry project experience yet</h4><p>My projects are personal and academic. I haven't shipped work inside a real product team with stakeholders, competing priorities, and a production user base. I'm actively seeking an internship — this is the only gap I can close by doing it, not by studying it.</p></div>
+      <div class="hcard"><span class="htag htag-w">Gap — actively fixing</span><h4>Visual design depth is developing</h4><p>My UI execution is functional and clean, but my visual design range is limited. I'm working through Refactoring UI and studying design systems from Linear, Vercel, and Stripe. Future portfolio updates will show evidence of this, not just the claim.</p></div>
+      <div class="hcard"><span class="htag htag-w">Gap — next project will address</span><h4>No published research documentation</h4><p>I've done research in coursework but not documented it in shareable, portfolio-quality format. My next case study will include the full research artefacts: interview notes, affinity maps, and personas — not described, but shown.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <p class="eyebrow eyebrow-muted" style="text-align:center">Contact</p>
+      <h2>Let's talk about a role,<br>a project, or a problem.</h2>
+      <p>I'm looking for internships and junior positions in UI/UX or AI product design — roles where I can contribute from day one and grow fast. If you're hiring for that, I'd like to hear from you.</p>
+      <div class="clinks">
+        <a href="mailto:ananyabhat377@gmail.com" class="clink clink-primary">✉ ananyabhat377@gmail.com</a>
+        <a href="#" class="clink">LinkedIn ↗</a>
+        <a href="#" class="clink">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Ananya Bhat · CS & Design · 2025 · Built in HTML — no templates, no builders.</p>
+</footer>
 
 <script>
-const skills = [
-  {id:1,name:"Python & data science",person:"Ravi M.",initials:"RM",color:"#E6F1FB",textColor:"#0C447C",cat:"tech",desc:"I'll teach you Python fundamentals, pandas, and matplotlib. 2+ years tutoring.",rating:4.9,reviews:12,dist:"0.8 km",saved:false,badge:"Popular",badgeBg:"#EAF3DE",badgeColor:"#27500A"},
-  {id:2,name:"Silk saree draping",person:"Meena S.",initials:"MS",color:"#FBEAF0",textColor:"#72243E",cat:"creative",desc:"Traditional Mysore style and 5 modern draping styles. Any occasion.",rating:5.0,reviews:8,dist:"1.2 km",saved:false,badge:"Top rated",badgeBg:"#FAEEDA",badgeColor:"#633806"},
-  {id:3,name:"Yoga & pranayama",person:"Suresh K.",initials:"SK",color:"#E1F5EE",textColor:"#085041",cat:"wellness",desc:"15 years practice. Beginner to intermediate. Morning or evening sessions.",rating:4.8,reviews:21,dist:"2.1 km",saved:false,badge:null},
-  {id:4,name:"Plumbing & repairs",person:"Ganesh R.",initials:"GR",color:"#FAEEDA",textColor:"#633806",cat:"home",desc:"Minor repairs, pipe fitting, tap replacement. I'll come to your place.",rating:4.7,reviews:34,dist:"0.4 km",saved:false,badge:"Nearby",badgeBg:"#E6F1FB",badgeColor:"#0C447C"},
-  {id:5,name:"Carnatic music (vocal)",person:"Lakshmi P.",initials:"LP",color:"#EEEDFE",textColor:"#3C3489",cat:"creative",desc:"Graded lessons from basics to advanced ragas. All ages welcome.",rating:5.0,reviews:15,dist:"1.8 km",saved:false,badge:null},
-  {id:6,name:"UPSC & SSC coaching",person:"Arjun T.",initials:"AT",color:"#EAF3DE",textColor:"#27500A",cat:"tutoring",desc:"GS paper strategy, current affairs, answer writing. 3 cleared friends.",rating:4.8,reviews:9,dist:"3.0 km",saved:false,badge:null},
-  {id:7,name:"Graphic design (Canva/AI)",person:"Divya N.",initials:"DN",color:"#FAECE7",textColor:"#712B13",cat:"tech",desc:"Posters, social media content, brand kits. Also teach Canva from scratch.",rating:4.6,reviews:7,dist:"1.5 km",saved:false,badge:null},
-  {id:8,name:"Home garden setup",person:"Padma B.",initials:"PB",color:"#E1F5EE",textColor:"#085041",cat:"home",desc:"Terrace garden, kitchen herbs, composting. Will visit and help you set up.",rating:4.9,reviews:11,dist:"0.9 km",saved:false,badge:"New",badgeBg:"#FCEBEB",badgeColor:"#791F1F"},
-];
+// Active nav highlight on scroll
+const secs = document.querySelectorAll('section[id]');
+const nlinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  nlinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+}, { passive: true });
 
-const offers = [
-  {title:"Spoken English coaching",person:"Kiran V.",initials:"KV",color:"#E6F1FB",textColor:"#0C447C",wants:"Cooking lessons",desc:"Fluency & confidence building. 10 years corporate trainer."},
-  {title:"Mehendi design",person:"Fatima Z.",initials:"FZ",color:"#FBEAF0",textColor:"#72243E",wants:"Laptop repair help",desc:"Bridal, Arabic, Indo-fusion styles. Willing to travel locally."},
-  {title:"Auto & bike basic maintenance",person:"Santosh M.",initials:"SM",color:"#FAEEDA",textColor:"#633806",wants:"English tutoring",desc:"Oil change, chain lube, tyre check. Teach you too!"},
-];
-
-const messages = [
-  {name:"Ravi M.",preview:"Sure, Saturday 10am works for me!",time:"11m",unread:true},
-  {name:"Meena S.",preview:"Thank you for the lovely saree draping session.",time:"2h",unread:false},
-  {name:"Suresh K.",preview:"Can we do a trial session this week?",time:"1d",unread:true},
-];
-
-const pending = [
-  {title:"Python tutoring request",from:"Ananya K. → Ravi M.",status:"Awaiting reply",statusBg:"#FAEEDA",statusColor:"#633806",icon:"💬",iconBg:"#E6F1FB"},
-  {title:"Yoga session confirmed",from:"Suresh K. → Ananya K.",status:"Confirmed",statusBg:"#E1F5EE",statusColor:"#085041",icon:"✓",iconBg:"#E1F5EE"},
-];
-
-const exchanges = [
-  {title:"Python lessons",sub:"with Ravi M. · 3 sessions",status:"Active",statusBg:"#E1F5EE",statusColor:"#085041",icon:"💻",iconBg:"#E6F1FB"},
-  {title:"Yoga sessions",sub:"with Suresh K. · completed",status:"Done",statusBg:"#F1EFE8",statusColor:"#5F5E5A",icon:"🧘",iconBg:"#E1F5EE"},
-  {title:"Bharatanatyam",sub:"offered to Priya R. · 5 sessions",status:"Active",statusBg:"#E1F5EE",statusColor:"#085041",icon:"💃",iconBg:"#FBEAF0"},
-];
-
-let activeFilter = 'all';
-let selectedCat = 'tech';
-
-function showScreen(id, btn) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function setFilter(cat, btn) {
-  activeFilter = cat;
-  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  renderSkills();
-}
-
-function filterSkills() { renderSkills(); }
-
-function renderSkills() {
-  const q = (document.getElementById('searchSkills').value||'').toLowerCase();
-  const grid = document.getElementById('skillGrid');
-  grid.innerHTML = '';
-  skills.filter(s=>(activeFilter==='all'||s.cat===activeFilter)&&(!q||s.name.toLowerCase().includes(q)||s.person.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q))).forEach(s=>{
-    const d = document.createElement('div');
-    d.className = 'skill-card';
-    d.innerHTML = `
-      <div class="skill-card-top">
-        <div class="avatar" style="background:${s.color};color:${s.textColor}">${s.initials}</div>
-        ${s.badge?`<span class="badge" style="background:${s.badgeBg};color:${s.badgeColor}">${s.badge}</span>`:''}
-      </div>
-      <div class="skill-name">${s.name}</div>
-      <div class="skill-person">${s.person} · ${s.dist}</div>
-      <div class="skill-desc">${s.desc}</div>
-      <div class="skill-meta">
-        <span class="stars">${'★'.repeat(Math.round(s.rating))}</span>
-        <span>${s.rating} (${s.reviews})</span>
-      </div>
-      <div class="skill-actions">
-        <button class="btn-request" onclick="requestSkill(${s.id})">Request swap</button>
-        <button class="btn-save${s.saved?' saved':''}" id="save-${s.id}" onclick="toggleSave(${s.id})" title="Save">${s.saved?'♥':'♡'}</button>
-      </div>
-    `;
-    grid.appendChild(d);
+// Case study sidebar active state
+document.querySelectorAll('.cs-nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.cs-nav-item').forEach(n => n.classList.remove('on'));
+    item.classList.add('on');
   });
-}
-
-function requestSkill(id) {
-  const s = skills.find(x=>x.id===id);
-  alert(`Swap request sent to ${s.person} for "${s.name}"!`);
-}
-
-function toggleSave(id) {
-  const s = skills.find(x=>x.id===id);
-  s.saved = !s.saved;
-  const btn = document.getElementById('save-'+id);
-  if(btn){btn.textContent=s.saved?'♥':'♡';btn.className='btn-save'+(s.saved?' saved':'');}
-}
-
-function selCat(el, cat) {
-  document.querySelectorAll('.cat-opt').forEach(o=>o.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedCat = cat;
-}
-
-function submitSkill() {
-  const title = document.getElementById('skillTitle').value.trim();
-  if(!title){document.getElementById('skillTitle').focus();return;}
-  document.getElementById('successBanner').style.display='block';
-  document.getElementById('skillTitle').value='';
-  document.getElementById('skillDesc').value='';
-  document.getElementById('skillWant').value='';
-  setTimeout(()=>document.getElementById('successBanner').style.display='none',4000);
-  renderOffers();
-}
-
-function renderOffers() {
-  const list = document.getElementById('offerList');
-  list.innerHTML = '';
-  offers.forEach(o=>{
-    const d = document.createElement('div');
-    d.className = 'offer-card';
-    d.innerHTML = `
-      <div class="avatar" style="background:${o.color};color:${o.textColor};width:42px;height:42px;font-size:14px;flex-shrink:0">${o.initials}</div>
-      <div class="offer-body">
-        <div class="offer-title">${o.title}</div>
-        <div class="offer-person">${o.person}</div>
-        <span class="offer-wants">Wants: ${o.wants}</span>
-        <div class="offer-desc">${o.desc}</div>
-      </div>
-      <div class="offer-side">
-        <button class="btn-request" style="width:70px;font-size:11px;padding:6px">Connect ↗</button>
-      </div>
-    `;
-    list.appendChild(d);
-  });
-}
-
-function renderMessages() {
-  const list = document.getElementById('msgList');
-  list.innerHTML = '';
-  messages.forEach(m=>{
-    const d = document.createElement('div');
-    d.className = 'msg-item'+(m.unread?' unread':'');
-    d.innerHTML = `
-      ${m.unread?'<div class="dot"></div>':'<div style="width:8px;flex-shrink:0"></div>'}
-      <div class="msg-body">
-        <div class="msg-name">${m.name}</div>
-        <div class="msg-preview">${m.preview}</div>
-      </div>
-      <div class="msg-time">${m.time}</div>
-    `;
-    list.appendChild(d);
-  });
-  const pl = document.getElementById('pendingList');
-  pl.innerHTML = '';
-  pending.forEach(p=>{
-    const d = document.createElement('div');
-    d.className = 'offer-card';
-    d.style.marginBottom='8px';
-    d.innerHTML = `
-      <div style="width:38px;height:38px;border-radius:var(--border-radius-md);background:${p.iconBg};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${p.icon}</div>
-      <div class="offer-body">
-        <div class="offer-title">${p.title}</div>
-        <div class="offer-person">${p.from}</div>
-      </div>
-      <span class="status-pill" style="background:${p.statusBg};color:${p.statusColor};align-self:center">${p.status}</span>
-    `;
-    pl.appendChild(d);
-  });
-}
-
-function renderExchanges() {
-  const el = document.getElementById('exchangeList');
-  el.innerHTML = '';
-  exchanges.forEach(e=>{
-    const d = document.createElement('div');
-    d.className = 'exchange-row';
-    d.innerHTML = `
-      <div class="exchange-badge" style="background:${e.iconBg}">${e.icon}</div>
-      <div class="exchange-info">
-        <div class="exchange-title">${e.title}</div>
-        <div class="exchange-sub">${e.sub}</div>
-      </div>
-      <span class="status-pill" style="background:${e.statusBg};color:${e.statusColor}">${e.status}</span>
-    `;
-    el.appendChild(d);
-  });
-}
-
-renderSkills();
-renderOffers();
-renderMessages();
-renderExchanges();
+});
 </script>
 </body>
 </html>
