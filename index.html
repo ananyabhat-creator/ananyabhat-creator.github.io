@@ -111,8 +111,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rg
 .cs-nav-item{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:.88rem;color:var(--ink-3);border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s}
 .cs-nav-item:hover,.cs-nav-item.on{color:var(--accent);font-weight:500}
 .cs-nav-n{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700}
-.cs-body>div{margin-bottom:60px}
-.cs-body h3{font-size:1.25rem;color:var(--ink);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--accent-dim)}
+.cs-body>div{border:1px solid var(--border);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.cs-body h3{font-size:1.15rem;color:var(--ink);padding:18px 22px;margin:0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:background .15s}
+.cs-body h3:hover{background:var(--ground)}
+.cs-body h3 .chev{font-size:.85rem;color:var(--ink-3);transition:transform .25s;flex-shrink:0}
+.cs-body div.open h3{border-bottom:2px solid var(--accent-dim);background:var(--ground)}
+.cs-body div.open h3 .chev{transform:rotate(180deg)}
+.cs-section-body{display:none;padding:22px 22px 26px}
+.cs-body div.open .cs-section-body{display:block}
 .cs-body p{font-size:.95rem;margin-bottom:14px}
 .quote{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:16px 20px;margin:22px 0}
 .quote p{color:var(--ink-2);font-size:.9rem;font-style:italic;margin:0}
@@ -332,16 +338,19 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
 
       <div class="cs-body">
 
-        <div id="cs1">
-          <h3>01 — The Problem</h3>
+        <div id="cs1" class="open">
+          <h3>01 — The Problem <span class="chev">▾</span></h3>
+          <div class="cs-section-body">
           <p>Most people who struggle in job interviews don't lack knowledge. They lack <strong>practice under realistic conditions</strong>. A question you can answer calmly at your desk feels different when a stranger is watching the clock.</p>
           <p>The options available today are expensive (coaching: ₹2,000–₹10,000 per session), logistically difficult (peer mock interviews require a willing, domain-knowledgeable friend), or too passive (watching YouTube tips doesn't build any kind of muscle memory).</p>
           <div class="quote"><p>"The problem isn't information scarcity — it's the absence of a safe, repeatable space to fail in before it counts."</p></div>
           <p>This is the gap the AI Interview Coach targets: accessible, on-demand, judgment-free practice with feedback comparable to a coached session — at zero cost. The target user is a final-year student or early-career professional preparing for their first or second serious role.</p>
+          </div>
         </div>
 
         <div id="cs2">
-          <h3>02 — How It Works</h3>
+          <h3>02 — How It Works <span class="chev">▾</span></h3>
+          <div class="cs-section-body">
           <div class="flow">
             <div class="fstep">
               <div class="fnum">1</div>
@@ -360,10 +369,12 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
               <div class="fbody"><h4>Session synthesis</h4><p>After 5–8 questions, the model generates a wrap-up: patterns it noticed across answers, the strongest moment, and 2–3 concrete things to practice before the real interview. This is the output users reported finding most valuable in informal testing.</p></div>
             </div>
           </div>
+          </div>
         </div>
 
         <div id="cs3">
-          <h3>03 — UX Decisions & Why</h3>
+          <h3>03 — UX Decisions & Why <span class="chev">▾</span></h3>
+          <div class="cs-section-body">
           <ul class="decisions">
             <li class="decision">
               <div class="dlabel">Decision 01</div>
@@ -386,10 +397,12 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
               <p>Gemini processes the full conversation history per API call. After 5 turns, latency and cost climb noticeably. I truncated the live context to the last 3 exchanges while keeping the original system prompt intact — preserving role calibration and question tone without sending the full session on every call. This was an explicit product decision with a real tradeoff that I had to name and document.</p>
             </li>
           </ul>
+          </div>
         </div>
 
         <div id="cs4">
-          <h3>04 — How AI Is Used (Specifically)</h3>
+          <h3>04 — How AI Is Used (Specifically) <span class="chev">▾</span></h3>
+          <div class="cs-section-body">
           <div class="ai-box">
             <h4>Dynamic system prompt construction</h4>
             <p>The model doesn't receive a static template. The system prompt is built at runtime from the user's setup choices: role, seniority, and interview type. This means the "PM at a startup" and "SDE at a large company" sessions have meaningfully different contexts — not just a different label on the same prompt.</p>
@@ -406,10 +419,12 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
             <h4>What AI does NOT touch</h4>
             <p>UI rendering, session state, navigation, and error handling are all plain JavaScript. AI handles three things only: question generation, answer evaluation, and session synthesis. This was a deliberate scope decision — keeping the AI layer thin, fast, auditable, and replaceable if a better model comes along.</p>
           </div>
+          </div>
         </div>
 
         <div id="cs5">
-          <h3>05 — Limitations (Honest)</h3>
+          <h3>05 — Limitations (Honest) <span class="chev">▾</span></h3>
+          <div class="cs-section-body">
           <div class="lim-grid">
             <div class="lim lim-bad"><h4>No voice input</h4><p>Typing an answer is fundamentally different from speaking one. The product sidesteps the core anxiety of verbal delivery — which is the thing most people actually need to practice.</p></div>
             <div class="lim lim-bad"><h4>AI hallucinations in feedback</h4><p>The model occasionally gives feedback that contradicts what the user actually said. There's no ground-truth checking layer. Users need to know this, not be surprised by it.</p></div>
@@ -420,13 +435,16 @@ footer p{font-size:.82rem;color:rgba(255,255,255,.25)}
             <div class="lim lim-good"><h4>Next: Role-specific rubrics</h4><p>Pre-built evaluation criteria for 5 common roles (PM, SDE, Designer, Data Analyst, Consultant) to improve feedback precision where it matters most.</p></div>
             <div class="lim lim-good"><h4>Next: localStorage sessions</h4><p>Save summaries locally so users can compare their own sessions week over week without requiring a backend or login.</p></div>
           </div>
+          </div>
         </div>
 
         <div id="cs6">
-          <h3>06 — What I Learned</h3>
+          <h3>06 — What I Learned <span class="chev">▾</span></h3>
+          <div class="cs-section-body">
           <p>The hardest design problem wasn't the interface — it was <strong>managing user expectations of the AI</strong>. When a model gives you feedback on your answer, the instinct is to trust it completely. But LLMs can be confidently wrong. The real design challenge is communicating "this is useful signal, not ground truth" without undermining the product's entire value proposition.</p>
           <p>I also learned that <strong>prompt engineering is a design practice</strong>, not a developer task. The structure, tone, constraints, and examples you put in a system prompt directly shape what users experience — it deserves the same iteration and documentation that a design component does.</p>
           <div class="quote"><p>"If I redid this project, I'd run 5 user interviews before writing a line of code. I built because I thought I understood the problem. I mostly did — but I made assumptions that cost me time I could have spent earlier."</p></div>
+          </div>
         </div>
 
       </div>
@@ -565,11 +583,29 @@ window.addEventListener('scroll', () => {
   nlinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
 }, { passive: true });
 
-// Case study sidebar active state
-document.querySelectorAll('.cs-nav-item').forEach(item => {
+// Case study accordion
+document.querySelectorAll('.cs-body > div').forEach((section, i) => {
+  const h3 = section.querySelector('h3');
+  if (!h3) return;
+  h3.addEventListener('click', () => {
+    const isOpen = section.classList.contains('open');
+    section.classList.toggle('open', !isOpen);
+    // sync sidebar
+    document.querySelectorAll('.cs-nav-item').forEach((n, j) => {
+      n.classList.toggle('on', j === i && !isOpen);
+    });
+  });
+});
+
+// Sidebar nav clicks open the matching section
+document.querySelectorAll('.cs-nav-item').forEach((item, i) => {
   item.addEventListener('click', () => {
-    document.querySelectorAll('.cs-nav-item').forEach(n => n.classList.remove('on'));
-    item.classList.add('on');
+    const sections = document.querySelectorAll('.cs-body > div');
+    if (!sections[i]) return;
+    const isOpen = sections[i].classList.contains('open');
+    sections[i].classList.toggle('open', !isOpen);
+    item.classList.toggle('on', !isOpen);
+    if (!isOpen) sections[i].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 });
 </script>
